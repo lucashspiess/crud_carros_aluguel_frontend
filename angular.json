@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ueg-prog-webi-faculdade": {
+    "weg-prog-webi-faculdade": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ueg-prog-webi-faculdade",
+            "outputPath": "dist/weg-prog-webi-faculdade",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ueg-prog-webi-faculdade:build:production"
+              "browserTarget": "weg-prog-webi-faculdade:build:production"
             },
             "development": {
-              "browserTarget": "ueg-prog-webi-faculdade:build:development"
+              "browserTarget": "weg-prog-webi-faculdade:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ueg-prog-webi-faculdade:build"
+            "browserTarget": "weg-prog-webi-faculdade:build"
           }
         },
         "test": {
@@ -100,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

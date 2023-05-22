@@ -1,0 +1,286 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Lucas API",
+    "license": {
+      "name": "Apache License 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/v1/carro/{placa}": {
+      "get": {
+        "tags": [
+          "carro-controller"
+        ],
+        "description": "Método para retornar um carro pela placa",
+        "operationId": "obterPorPlaca",
+        "parameters": [
+          {
+            "name": "placa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CarroDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "carro-controller"
+        ],
+        "description": "Método utilizado para alterar os dados de um carro",
+        "operationId": "alterar",
+        "parameters": [
+          {
+            "name": "placa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarroIncluirDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CarroDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "carro-controller"
+        ],
+        "description": "Método utilizado para remover uma entidiade pela placa informada",
+        "operationId": "remover",
+        "parameters": [
+          {
+            "name": "placa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entidade Removida",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/carro": {
+      "post": {
+        "tags": [
+          "carro-controller"
+        ],
+        "description": "Inclusão de carro",
+        "operationId": "incluir",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarroIncluirDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Carro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/carro/{placa}/alugar-carro": {
+      "patch": {
+        "tags": [
+          "carro-controller"
+        ],
+        "description": "Método utilizado para alugar um carro",
+        "operationId": "alugar",
+        "parameters": [
+          {
+            "name": "placa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "carro alugado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/CarroDTO"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/carro/listar": {
+      "get": {
+        "tags": [
+          "carro-controller"
+        ],
+        "description": "Listagem Geral",
+        "operationId": "listAll",
+        "responses": {
+          "200": {
+            "description": "Listagem geral",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "404": {
+            "description": "Registro náo encontrado",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CarroIncluirDTO": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "quilometragem": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ano": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cor": {
+            "type": "string"
+          }
+        }
+      },
+      "CarroDTO": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "quilometragem": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ano": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cor": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Carro": {
+        "type": "object",
+        "properties": {
+          "placa": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "quilometragem": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ano": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cor": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicScheme": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}

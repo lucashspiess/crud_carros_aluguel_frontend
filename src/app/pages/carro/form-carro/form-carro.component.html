@@ -1,0 +1,46 @@
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
+  <div class="formCarro">
+    <h1>Formulário para {{acao}}</h1>
+    <mat-form-field>
+      <mat-label>Modelo:</mat-label>
+      <input matInput formControlName="modelo">
+      <mat-error *ngIf="handleError('modelo', 'required')">
+        O modelo do carro é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Cor:</mat-label>
+      <input matInput formControlName="cor">
+      <mat-error *ngIf="handleError('cor', 'required')">
+        A cor do carro é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ano:</mat-label>
+      <input matInput formControlName="ano">
+      <mat-error *ngIf="handleError('ano', 'required')">
+        O ano do carro é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Quilometragem:</mat-label>
+      <input matInput formControlName="quilometragem">
+      <mat-error *ngIf="handleError('quilometragem', 'required')">
+        A quilometragem do carro é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Placa:</mat-label>
+      <input matInput formControlName="placa">
+      <mat-error *ngIf="handleError('placa', 'required')">
+        A placa do carro é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Salvar</button>
+  </div>
+</form>
+
