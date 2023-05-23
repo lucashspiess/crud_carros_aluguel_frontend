@@ -84,11 +84,13 @@ export class ListCarroComponent implements OnInit {
 
   alugar(placa: string){
     this.carroService.alugar({placa: placa}).subscribe();
+    this.showMensagemSimples("Carro alugado com sucesso!");
     this.atualizar();
   }
 
   desalugar(placa: string){
     this.carroService.desalugar({placa: placa}).subscribe();
+    this.showMensagemSimples("Carro devolvido com sucesso!");
     this.atualizar();
   }
 
