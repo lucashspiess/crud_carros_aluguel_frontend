@@ -33,9 +33,16 @@
         A quilometragem do carro é obrigatório
       </mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field *ngIf="acao == 'Incluir'">
       <mat-label>Placa:</mat-label>
       <input matInput formControlName="placa">
+      <mat-error *ngIf="handleError('placa', 'required')">
+        A placa do carro é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="acao == 'Editar'">
+      <mat-label>Placa:</mat-label>
+      <input matInput formControlName="placa" readonly>
       <mat-error *ngIf="handleError('placa', 'required')">
         A placa do carro é obrigatório
       </mat-error>

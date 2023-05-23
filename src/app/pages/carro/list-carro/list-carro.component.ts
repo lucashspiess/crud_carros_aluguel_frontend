@@ -35,7 +35,6 @@ export class ListCarroComponent implements OnInit {
   private buscarDados() {
     this.carroService.listAll().subscribe(data => {
       this.carroListaDataSource.data = data;
-      this.carroListaDataSource.sort;
     })
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter} from "@angular/material/core";
 import {CarroControllerService} from "../../../api/services/carro-controller.service";
@@ -21,7 +21,7 @@ export class FormCarroComponent {
   public readonly ACAO_INCLUIR = "Incluir";
   public readonly ACAO_EDITAR = "Editar";
 
-  acao : string = this.ACAO_INCLUIR;
+  acao: string = this.ACAO_INCLUIR;
   placa!: string;
 
   constructor(
@@ -37,22 +37,34 @@ export class FormCarroComponent {
     this._adapter.setLocale('pt-br');
     this.prepararEdicao();
   }
+
   createForm() {
-    this.formGroup = this.formBuilder.group({
-      ano: [null, Validators.required],
-      modelo: [null, Validators.required],
-      cor: [null, Validators.required],
-      placa: [null, Validators.required],
-      quilometragem: [null, Validators.required]
-    });
+    if(this.acao == "Editar"){
+      this.carroService.obterPorPlaca({placa: this.placa}).subscribe(retorno =>
+        this.formGroup = this.formBuilder.group({
+          ano: [retorno.ano, Validators.required],
+          modelo: [retorno.modelo, Validators.required],
+          cor: [retorno.cor, Validators.required],
+          placa: [retorno.placa],
+          quilometragem: [retorno.quilometragem, Validators.required]
+        }));
+    }else{
+        this.formGroup = this.formBuilder.group({
+          ano: [null, Validators.required],
+          modelo: [null, Validators.required],
+          cor: [null, Validators.required],
+          placa: [null, Validators.required],
+          quilometragem: [null, Validators.required]
+        })
+    }
   }
 
   onSubmit() {
     if (this.formGroup.valid) {
-      if(!this.placa){
+      if (!this.placa) {
         this.realizarInclusao();
         this.atualizar();
-      }else{
+      } else {
         this.realizarEdicao();
         this.atualizar();
       }
@@ -74,24 +86,11 @@ export class FormCarroComponent {
     return this.formGroup.controls[controlName].hasError(errorName);
   };
 
-  confirmarAcao(carroDto: CarroDto, acao: string) {
-    const dialogRef = this.dialog.open(ConfirmationDialog, {
-      data: {
-        titulo: 'Mensagem!!!',
-        mensagem: `Ação de ${acao} dados: ${carroDto.modelo} (placa: ${carroDto.placa}) realizada com sucesso!`,
-        textoBotoes: {
-          ok: 'ok',
-        },
-      },
-    });
-
-  }
-
   private prepararEdicao() {
     const paramPlaca = this.route.snapshot.paramMap.get('placa');
-    if (paramPlaca){
+    if (paramPlaca) {
       const placa = paramPlaca;
-      console.log("placa",paramPlaca);
+      console.log("placa", paramPlaca);
       this.carroService.obterPorPlaca({placa: placa}).subscribe(
         retorno => {
           this.acao = this.ACAO_EDITAR;
@@ -106,13 +105,13 @@ export class FormCarroComponent {
   private realizarEdicao() {
     this.carroService.alterar({placa: this.placa, body: this.formGroup.value})
       .subscribe(retorno => {
-        this.confirmarAcao(retorno, this.ACAO_EDITAR);
+        this.showMensagemSimples("Edição realizada com sucesso!")
         this.router.navigateByUrl("/carro");
       }, erro => {
-        console.log("Erro:" + erro);
       })
   }
-  showMensagemSimples( mensagem: string, duracao: number = 2000) {
+
+  showMensagemSimples(mensagem: string, duracao: number = 2000) {
     this.snackBar.open(mensagem, 'Fechar', {
       duration: duracao,
       horizontalPosition: 'center',
@@ -120,7 +119,7 @@ export class FormCarroComponent {
     });
   }
 
-  atualizar(){
+  atualizar() {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigateByUrl('/carro');
     });
