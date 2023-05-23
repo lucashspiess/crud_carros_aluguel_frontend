@@ -20,14 +20,13 @@ mat-sidenav {
   border-radius: 10px;
   margin: 16px;
   margin-left: 32px;
-
   padding: 16px;
-
   overflow: auto;
 }
 
 mat-sidenav-container {
   height: calc(100vh - 65px);
+  width: 100%;
 }
 
 .menu-button {
