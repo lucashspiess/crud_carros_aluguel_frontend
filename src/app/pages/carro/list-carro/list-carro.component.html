@@ -39,14 +39,19 @@
       <td mat-cell class="coluna" *matCellDef="let element"> {{element.status}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="diaria">
+      <th mat-header-cell class="coluna" *matHeaderCellDef> Diária </th>
+      <td mat-cell class="coluna" *matCellDef="let element"> {{element.diaria}} </td>
+    </ng-container>
+
     <!-- Ação Column -->
     <ng-container matColumnDef="acao">
       <th mat-header-cell class="coluna" *matHeaderCellDef> Ação </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button *ngIf="element.status == 'Alugado'" (click)="desalugar(element.placa)">
+        <button mat-icon-button *ngIf="element.status == 'Alugado'" (click)="confirmarDevolver(element)">
           <mat-icon *ngIf="element.status == 'Alugado'">lock</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="element.status == 'Disponível'" (click)="alugar(element.placa)">
+        <button mat-icon-button *ngIf="element.status == 'Disponível'" [routerLink]="['/carro',element.placa,'aluguel']">
           <mat-icon *ngIf="element.status == 'Disponível'">lock_open</mat-icon>
         </button>
         <button mat-icon-button (click)="confirmarExcluir(element)">

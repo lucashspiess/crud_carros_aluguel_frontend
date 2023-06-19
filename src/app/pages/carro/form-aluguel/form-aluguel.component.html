@@ -1,0 +1,34 @@
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
+  <div class="formAluguel">
+    <h1>Formulário para Aluguel</h1>
+    <mat-form-field>
+      <mat-label>Placa:</mat-label>
+      <input matInput formControlName="placa" readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>CPF do cliente:</mat-label>
+      <input matInput formControlName="cpf_cliente" type="number">
+      <mat-error *ngIf="handleError('cpf_cliente', 'required')">
+        O CPF do cliente é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Data de início do aluguel</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="data_inicio">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Data de fim do aluguel</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="data_fim">
+      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Salvar</button>
+  </div>
+</form>
+

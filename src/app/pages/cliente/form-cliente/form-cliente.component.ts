@@ -1,30 +1,31 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter} from "@angular/material/core";
-import {CarroControllerService} from "../../../api/services/carro-controller.service";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ClienteControllerService} from "../../../api/services/cliente-controller.service";
 
 @Component({
-  selector: 'app-form-carro',
-  templateUrl: './form-carro.component.html',
-  styleUrls: ['./form-carro.component.scss']
+  selector: 'app-form-cliente',
+  templateUrl: './form-cliente.component.html',
+  styleUrls: ['./form-cliente.component.scss']
 })
-export class FormCarroComponent {
+export class FormClienteComponent {
   formGroup!: FormGroup;
   public readonly ACAO_INCLUIR = "Incluir";
   public readonly ACAO_EDITAR = "Editar";
 
   acao: string = this.ACAO_INCLUIR;
-  placa!: string;
+  id!: number;
+  cpf!: number;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,
-    public carroService: CarroControllerService,
+    public clienteService: ClienteControllerService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {
@@ -35,30 +36,28 @@ export class FormCarroComponent {
 
   createForm() {
     if(this.acao == "Editar"){
-      this.carroService.obterPorPlaca({placa: this.placa}).subscribe(retorno =>
+      this.clienteService.obterPorIdCliente({id: this.id}).subscribe(retorno =>
         this.formGroup = this.formBuilder.group({
-          ano: [retorno.ano, Validators.required],
-          modelo: [retorno.modelo, Validators.required],
-          cor: [retorno.cor, Validators.required],
-          placa: [retorno.placa],
-          diaria: [retorno.diaria],
-          quilometragem: [retorno.quilometragem, Validators.required]
+          cpf: [retorno.cpf, Validators.required],
+          email: [retorno.email, Validators.required],
+          nome: [retorno.nome, Validators.required],
         }));
     }else{
+        const paramCpf = this.route.snapshot.paramMap.get('cpf');
+        if(paramCpf){
+          this.cpf = parseInt(paramCpf);
+        }
         this.formGroup = this.formBuilder.group({
-          ano: [null, Validators.required],
-          modelo: [null, Validators.required],
-          cor: [null, Validators.required],
-          placa: [null, Validators.required],
-          diaria: [null, Validators.required],
-          quilometragem: [null, Validators.required]
+          cpf: [this.cpf, Validators.required],
+          email: [null, Validators.required],
+          nome: [null, Validators.required],
         })
     }
   }
 
   onSubmit() {
     if (this.formGroup.valid) {
-      if (!this.placa) {
+      if (!this.id) {
         this.realizarInclusao();
         this.atualizar();
       } else {
@@ -69,7 +68,7 @@ export class FormCarroComponent {
   }
 
   private realizarInclusao() {
-    this.carroService.incluirCarro({body: this.formGroup.value})
+    this.clienteService.incluirCliente({body: this.formGroup.value})
       .subscribe(retorno => {
         this.showMensagemSimples("Inclusão realizada com sucesso!");
       }, erro => {
@@ -82,13 +81,13 @@ export class FormCarroComponent {
   };
 
   private prepararEdicao() {
-    const paramPlaca = this.route.snapshot.paramMap.get('placa');
-    if (paramPlaca) {
-      const placa = paramPlaca;
-      this.carroService.obterPorPlaca({placa: placa}).subscribe(
+    const paramId = this.route.snapshot.paramMap.get('id');
+    if (paramId) {
+      const id = parseInt(paramId);
+      this.clienteService.obterPorIdCliente({id: id}).subscribe(
         retorno => {
           this.acao = this.ACAO_EDITAR;
-          this.placa = retorno.placa || "";
+          this.id = retorno.id || 0;
           this.formGroup.patchValue(retorno);
         }
       )
@@ -96,10 +95,10 @@ export class FormCarroComponent {
   }
 
   private realizarEdicao() {
-    this.carroService.alterarCarro({placa: this.placa, body: this.formGroup.value})
+    this.clienteService.alterarCliente({id: this.id, body: this.formGroup.value})
       .subscribe(retorno => {
         this.showMensagemSimples("Edição realizada com sucesso!")
-        this.router.navigateByUrl("/carro");
+        this.router.navigateByUrl("/cliente");
       }, erro => {
       })
   }
@@ -114,7 +113,7 @@ export class FormCarroComponent {
 
   atualizar() {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigateByUrl('/carro');
+      this.router.navigateByUrl('/cliente');
     });
   }
 }

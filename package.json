@@ -22,6 +22,9 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@ngneat/until-destroy": "^10.0.0-beta.0",
+    "angular-star-rating": "^6.0.0",
+    "igniteui-angular": "^16.0.4",
+    "igniteui-webcomponents": "^4.2.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

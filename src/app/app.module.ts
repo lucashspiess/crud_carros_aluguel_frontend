@@ -16,6 +16,8 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
 import {MatDialogModule} from "@angular/material/dialog";
 import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {ClienteModule} from "./pages/cliente/cliente.module";
 
 @NgModule({
   declarations: [
@@ -35,11 +37,13 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatDividerModule,
     CarroModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ClienteModule,
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

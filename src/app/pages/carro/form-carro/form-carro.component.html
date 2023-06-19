@@ -33,6 +33,13 @@
         A quilometragem do carro é obrigatório
       </mat-error>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Diária:</mat-label>
+      <input matInput formControlName="diaria" type="number" min="0">
+      <mat-error *ngIf="handleError('diaria', 'required')">
+        A diária do carro é obrigatório
+      </mat-error>
+    </mat-form-field>
     <mat-form-field *ngIf="acao == 'Incluir'">
       <mat-label>Placa:</mat-label>
       <input matInput formControlName="placa">

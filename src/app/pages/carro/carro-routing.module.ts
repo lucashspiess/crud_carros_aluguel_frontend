@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeCarroComponent} from "./home-carro/home-carro.component";
 import {ListCarroComponent} from "./list-carro/list-carro.component";
 import {FormCarroComponent} from "./form-carro/form-carro.component";
+import {FormAluguelComponent} from "./form-aluguel/form-aluguel.component";
 
 export const carroRoutes: Routes = [
   {
@@ -12,6 +13,10 @@ export const carroRoutes: Routes = [
       {
         path: "",
         component: ListCarroComponent
+      },
+      {
+        path: ":placa/aluguel",
+        component: FormAluguelComponent
       },
       {
         path: "novo",
