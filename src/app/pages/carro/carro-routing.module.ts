@@ -15,6 +15,10 @@ export const carroRoutes: Routes = [
         component: ListCarroComponent
       },
       {
+        path: ":placa/:cpf/aluguel",
+        component: FormAluguelComponent
+      },
+      {
         path: ":placa/aluguel",
         component: FormAluguelComponent
       },

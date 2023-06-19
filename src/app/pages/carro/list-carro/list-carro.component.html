@@ -31,7 +31,7 @@
 
     <ng-container matColumnDef="quilometragem">
       <th mat-header-cell class="coluna" *matHeaderCellDef> Quilometragem </th>
-      <td mat-cell class="coluna" *matCellDef="let element"> {{element.quilometragem}} </td>
+      <td mat-cell class="coluna" *matCellDef="let element"> {{element.quilometragem}} Km </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
@@ -41,7 +41,7 @@
 
     <ng-container matColumnDef="diaria">
       <th mat-header-cell class="coluna" *matHeaderCellDef> Diária </th>
-      <td mat-cell class="coluna" *matCellDef="let element"> {{element.diaria}} </td>
+      <td mat-cell class="coluna" *matCellDef="let element"> R$ {{element.diaria}} </td>
     </ng-container>
 
     <!-- Ação Column -->

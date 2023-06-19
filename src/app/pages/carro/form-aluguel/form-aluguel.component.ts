@@ -22,6 +22,7 @@ import {ClienteControllerService} from "../../../api/services/cliente-controller
 export class FormAluguelComponent {
   formGroup!: FormGroup;
   placa!: string;
+  cpf!: number;
 
   constructor(
     private router: Router,
@@ -40,8 +41,12 @@ export class FormAluguelComponent {
 
   createForm() {
     const paramPlaca = this.route.snapshot.paramMap.get('placa');
+    const paramCpf = this.route.snapshot.paramMap.get('cpf');
     if (paramPlaca) {
       const placa = paramPlaca;
+      if(paramCpf){
+        this.cpf = parseInt(paramCpf);
+      }
       this.carroService.obterPorPlaca({placa: placa}).subscribe(
         retorno => {
           this.placa = retorno.placa || "";
@@ -50,20 +55,11 @@ export class FormAluguelComponent {
       )
       this.formGroup = this.formBuilder.group({
         placa: [placa, Validators.required],
-        cpf_cliente: [null, Validators.required],
+        cpf_cliente: [this.cpf, Validators.required],
         data_inicio: [new Date(), Validators.required],
         data_fim: [new Date(), Validators.required],
       })
     }
-  }
-
-  private realizarInclusao() {
-    this.aluguelService.incluirAluguel({placa: this.placa, body: this.formGroup.value})
-      .subscribe(retorno => {
-        this.showMensagemSimples("Aluguel realizado com sucesso!");
-      }, erro => {
-        console.log("Erro:" + erro);
-      })
   }
 
   public handleError = (controlName: string, errorName: string) => {
@@ -101,6 +97,7 @@ export class FormAluguelComponent {
         })
         dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
           if (confirmed?.resultado) {
+            this.showMensagemSimples("Aluguel realizado com sucesso!");
             this.atualizar();
           } else {
             this.aluguelService.removerAluguel({id: retorno1.id || 0}).subscribe();
@@ -128,7 +125,7 @@ export class FormAluguelComponent {
         dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
           if (confirmed?.resultado) {
             this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-              this.router.navigateByUrl(`/cliente/novo/${aluguelDto.cpf_cliente}`);
+              this.router.navigateByUrl(`/cliente/novo/${aluguelDto.cpf_cliente}/${aluguelDto.placa}`);
             });
           }
         });

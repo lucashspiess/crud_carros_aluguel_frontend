@@ -19,6 +19,7 @@ export class FormClienteComponent {
   acao: string = this.ACAO_INCLUIR;
   id!: number;
   cpf!: number;
+  placa!: string;
 
   constructor(
     private router: Router,
@@ -44,8 +45,10 @@ export class FormClienteComponent {
         }));
     }else{
         const paramCpf = this.route.snapshot.paramMap.get('cpf');
-        if(paramCpf){
+        const paramPlaca = this.route.snapshot.paramMap.get('placa');
+        if(paramCpf && paramPlaca ){
           this.cpf = parseInt(paramCpf);
+          this.placa = paramPlaca;
         }
         this.formGroup = this.formBuilder.group({
           cpf: [this.cpf, Validators.required],
@@ -112,8 +115,15 @@ export class FormClienteComponent {
   }
 
   atualizar() {
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigateByUrl('/cliente');
-    });
+    if(this.placa){
+      console.log("teste");
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigateByUrl(`/carro/${this.placa}/${this.cpf}/aluguel`);
+      });
+    }else{
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigateByUrl('/cliente');
+      });
+    }
   }
 }
