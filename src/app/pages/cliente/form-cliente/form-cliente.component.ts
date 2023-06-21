@@ -20,6 +20,8 @@ export class FormClienteComponent {
   id!: number;
   cpf!: number;
   placa!: string;
+  data_inicio!: string;
+  data_fim!: string;
 
   constructor(
     private router: Router,
@@ -46,7 +48,11 @@ export class FormClienteComponent {
     }else{
         const paramCpf = this.route.snapshot.paramMap.get('cpf');
         const paramPlaca = this.route.snapshot.paramMap.get('placa');
-        if(paramCpf && paramPlaca ){
+        const paramInicio = this.route.snapshot.paramMap.get('data_inicio');
+        const paramFim = this.route.snapshot.paramMap.get('data_fim');
+      if(paramCpf && paramPlaca && paramInicio && paramFim){
+          this.data_inicio = paramInicio;
+          this.data_fim = paramFim;
           this.cpf = parseInt(paramCpf);
           this.placa = paramPlaca;
         }
@@ -116,9 +122,8 @@ export class FormClienteComponent {
 
   atualizar() {
     if(this.placa){
-      console.log("teste");
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigateByUrl(`/carro/${this.placa}/${this.cpf}/aluguel`);
+        this.router.navigateByUrl(`/carro/${this.placa}/${this.cpf}/${this.data_inicio}/${this.data_fim}/aluguel`);
       });
     }else{
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {

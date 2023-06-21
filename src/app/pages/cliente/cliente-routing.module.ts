@@ -22,7 +22,7 @@ export const clienteRoutes: Routes = [
         component: FormClienteComponent
       },
       {
-        path: "novo/:cpf/:placa",
+        path: "novo/:cpf/:data_inicio/:data_fim/:placa",
         component: FormClienteComponent
       }
     ]

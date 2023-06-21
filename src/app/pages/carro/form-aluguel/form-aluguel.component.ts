@@ -6,7 +6,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AluguelControllerService} from "../../../api/services/aluguel-controller.service";
-import {CarroDto} from "../../../api/models/carro-dto";
 import {
   ConfirmationDialog,
   ConfirmationDialogResult
@@ -23,6 +22,8 @@ export class FormAluguelComponent {
   formGroup!: FormGroup;
   placa!: string;
   cpf!: number;
+  data_inicio: Date = new Date();
+  data_fim: Date = new Date();
 
   constructor(
     private router: Router,
@@ -42,9 +43,13 @@ export class FormAluguelComponent {
   createForm() {
     const paramPlaca = this.route.snapshot.paramMap.get('placa');
     const paramCpf = this.route.snapshot.paramMap.get('cpf');
+    const paramInicio = this.route.snapshot.paramMap.get('data_inicio');
+    const paramFim = this.route.snapshot.paramMap.get('data_fim');
     if (paramPlaca) {
       const placa = paramPlaca;
-      if(paramCpf){
+      if(paramCpf && paramInicio && paramFim){
+        this.data_inicio = new Date(paramInicio);
+        this.data_fim = new Date(paramFim);
         this.cpf = parseInt(paramCpf);
       }
       this.carroService.obterPorPlaca({placa: placa}).subscribe(
@@ -56,8 +61,8 @@ export class FormAluguelComponent {
       this.formGroup = this.formBuilder.group({
         placa: [placa, Validators.required],
         cpf_cliente: [this.cpf, Validators.required],
-        data_inicio: [new Date(), Validators.required],
-        data_fim: [new Date(), Validators.required],
+        data_inicio: [new Date(this.data_inicio), Validators.required],
+        data_fim: [new Date(this.data_fim), Validators.required],
       })
     }
   }
@@ -124,8 +129,10 @@ export class FormAluguelComponent {
         })
         dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
           if (confirmed?.resultado) {
+            const paramInicio = new Date(aluguelDto.data_inicio || "");
+            const paramFim = new Date(aluguelDto.data_fim || "");
             this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-              this.router.navigateByUrl(`/cliente/novo/${aluguelDto.cpf_cliente}/${aluguelDto.placa}`);
+              this.router.navigateByUrl(`/cliente/novo/${aluguelDto.cpf_cliente}/${paramInicio.toISOString()}/${paramFim.toISOString()}/${aluguelDto.placa}`);
             });
           }
         });
