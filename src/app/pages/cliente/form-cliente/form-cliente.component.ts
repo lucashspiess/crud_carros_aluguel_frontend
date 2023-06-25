@@ -38,29 +38,29 @@ export class FormClienteComponent {
   }
 
   createForm() {
-    if(this.acao == "Editar"){
+    if (this.acao == "Editar") {
       this.clienteService.obterPorIdCliente({id: this.id}).subscribe(retorno =>
         this.formGroup = this.formBuilder.group({
           cpf: [retorno.cpf, Validators.required],
           email: [retorno.email, Validators.required],
           nome: [retorno.nome, Validators.required],
         }));
-    }else{
-        const paramCpf = this.route.snapshot.paramMap.get('cpf');
-        const paramPlaca = this.route.snapshot.paramMap.get('placa');
-        const paramInicio = this.route.snapshot.paramMap.get('data_inicio');
-        const paramFim = this.route.snapshot.paramMap.get('data_fim');
-      if(paramCpf && paramPlaca && paramInicio && paramFim){
-          this.data_inicio = paramInicio;
-          this.data_fim = paramFim;
-          this.cpf = parseInt(paramCpf);
-          this.placa = paramPlaca;
-        }
-        this.formGroup = this.formBuilder.group({
-          cpf: [this.cpf, Validators.required],
-          email: [null, Validators.required],
-          nome: [null, Validators.required],
-        })
+    } else {
+      const paramCpf = this.route.snapshot.paramMap.get('cpf');
+      const paramPlaca = this.route.snapshot.paramMap.get('placa');
+      const paramInicio = this.route.snapshot.paramMap.get('data_inicio');
+      const paramFim = this.route.snapshot.paramMap.get('data_fim');
+      if (paramCpf && paramPlaca && paramInicio && paramFim) {
+        this.data_inicio = paramInicio;
+        this.data_fim = paramFim;
+        this.cpf = parseInt(paramCpf);
+        this.placa = paramPlaca;
+      }
+      this.formGroup = this.formBuilder.group({
+        cpf: [this.cpf, Validators.required],
+        email: [null, Validators.required],
+        nome: [null, Validators.required],
+      })
     }
   }
 
@@ -121,11 +121,11 @@ export class FormClienteComponent {
   }
 
   atualizar() {
-    if(this.placa){
+    if (this.placa) {
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigateByUrl(`/carro/${this.placa}/${this.cpf}/${this.data_inicio}/${this.data_fim}/aluguel`);
       });
-    }else{
+    } else {
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigateByUrl('/cliente');
       });

@@ -88,7 +88,7 @@ export class FormAluguelComponent {
 
   confirmarAluguel(aluguelDto: AluguelDto) {
     this.carroService.obterPorPlaca({placa: aluguelDto.placa || ""}).subscribe(retorno => {
-      this.aluguelService.incluirAluguel({placa: aluguelDto.placa || "", body: aluguelDto}).subscribe(retorno1 => {
+      this.aluguelService.incluirAluguel({placa: aluguelDto.placa || "", cpf: aluguelDto.cpf_cliente || 0,body: aluguelDto}).subscribe(retorno1 => {
         const dialogRef = this.dialog.open(ConfirmationDialog, {
           data: {
             titulo: 'Confirmar?',

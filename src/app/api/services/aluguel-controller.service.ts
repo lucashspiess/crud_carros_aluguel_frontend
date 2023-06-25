@@ -140,6 +140,69 @@ export class AluguelControllerService extends BaseService {
   }
 
   /**
+   * Path part for operation incluirAluguel
+   */
+  static readonly IncluirAluguelPath = '/api/v1/aluguel/{placa}/{cpf}';
+
+  /**
+   * Inclusão de aluguel
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `incluirAluguel()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  incluirAluguel$Response(params: {
+    placa: string;
+    cpf: number;
+    body: AluguelDto
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<AluguelDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.IncluirAluguelPath, 'post');
+    if (params) {
+      rb.path('placa', params.placa, {});
+      rb.path('cpf', params.cpf, {});
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<AluguelDto>;
+      })
+    );
+  }
+
+  /**
+   * Inclusão de aluguel
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `incluirAluguel$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  incluirAluguel(params: {
+    placa: string;
+    cpf: number;
+    body: AluguelDto
+  },
+  context?: HttpContext
+
+): Observable<AluguelDto> {
+
+    return this.incluirAluguel$Response(params,context).pipe(
+      map((r: StrictHttpResponse<AluguelDto>) => r.body as AluguelDto)
+    );
+  }
+
+  /**
    * Path part for operation obterPelaPlaca
    */
   static readonly ObterPelaPlacaPath = '/api/v1/aluguel/{placa}';
@@ -192,66 +255,6 @@ export class AluguelControllerService extends BaseService {
 ): Observable<AluguelDto> {
 
     return this.obterPelaPlaca$Response(params,context).pipe(
-      map((r: StrictHttpResponse<AluguelDto>) => r.body as AluguelDto)
-    );
-  }
-
-  /**
-   * Path part for operation incluirAluguel
-   */
-  static readonly IncluirAluguelPath = '/api/v1/aluguel/{placa}';
-
-  /**
-   * Inclusão de aluguel
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `incluirAluguel()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  incluirAluguel$Response(params: {
-    placa: string;
-    body: AluguelDto
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<AluguelDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.IncluirAluguelPath, 'post');
-    if (params) {
-      rb.path('placa', params.placa, {});
-      rb.body(params.body, 'application/json');
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<AluguelDto>;
-      })
-    );
-  }
-
-  /**
-   * Inclusão de aluguel
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `incluirAluguel$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  incluirAluguel(params: {
-    placa: string;
-    body: AluguelDto
-  },
-  context?: HttpContext
-
-): Observable<AluguelDto> {
-
-    return this.incluirAluguel$Response(params,context).pipe(
       map((r: StrictHttpResponse<AluguelDto>) => r.body as AluguelDto)
     );
   }
