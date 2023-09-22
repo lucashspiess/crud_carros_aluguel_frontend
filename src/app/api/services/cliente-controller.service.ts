@@ -24,26 +24,26 @@ export class ClienteControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation obterPorIdCliente
+   * Path part for operation clienteControllerObterPorIdCliente
    */
-  static readonly ObterPorIdClientePath = '/api/v1/cliente/{id}';
+  static readonly ClienteControllerObterPorIdClientePath = '/api/v1/cliente/{id}';
 
   /**
    * Método para retornar um cliente pelo id
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `obterPorIdCliente()` instead.
+   * To access only the response body, use `clienteControllerObterPorIdCliente()` instead.
    *
    * This method doesn't expect any request body.
    */
-  obterPorIdCliente$Response(params: {
+  clienteControllerObterPorIdCliente$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<ClienteDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.ObterPorIdClientePath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.ClienteControllerObterPorIdClientePath, 'get');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -64,36 +64,36 @@ export class ClienteControllerService extends BaseService {
    * Método para retornar um cliente pelo id
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `obterPorIdCliente$Response()` instead.
+   * To access the full response (for headers, for example), `clienteControllerObterPorIdCliente$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  obterPorIdCliente(params: {
+  clienteControllerObterPorIdCliente(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<ClienteDto> {
 
-    return this.obterPorIdCliente$Response(params,context).pipe(
+    return this.clienteControllerObterPorIdCliente$Response(params,context).pipe(
       map((r: StrictHttpResponse<ClienteDto>) => r.body as ClienteDto)
     );
   }
 
   /**
-   * Path part for operation alterarCliente
+   * Path part for operation clienteControllerAlterarCliente
    */
-  static readonly AlterarClientePath = '/api/v1/cliente/{id}';
+  static readonly ClienteControllerAlterarClientePath = '/api/v1/cliente/{id}';
 
   /**
    * Método utilizado para alterar os dados de um cliente
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `alterarCliente()` instead.
+   * To access only the response body, use `clienteControllerAlterarCliente()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  alterarCliente$Response(params: {
+  clienteControllerAlterarCliente$Response(params: {
     id: number;
     body: ClienteDto
   },
@@ -101,7 +101,7 @@ export class ClienteControllerService extends BaseService {
 
 ): Observable<StrictHttpResponse<ClienteDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.AlterarClientePath, 'put');
+    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.ClienteControllerAlterarClientePath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
@@ -123,11 +123,11 @@ export class ClienteControllerService extends BaseService {
    * Método utilizado para alterar os dados de um cliente
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `alterarCliente$Response()` instead.
+   * To access the full response (for headers, for example), `clienteControllerAlterarCliente$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  alterarCliente(params: {
+  clienteControllerAlterarCliente(params: {
     id: number;
     body: ClienteDto
   },
@@ -135,32 +135,32 @@ export class ClienteControllerService extends BaseService {
 
 ): Observable<ClienteDto> {
 
-    return this.alterarCliente$Response(params,context).pipe(
+    return this.clienteControllerAlterarCliente$Response(params,context).pipe(
       map((r: StrictHttpResponse<ClienteDto>) => r.body as ClienteDto)
     );
   }
 
   /**
-   * Path part for operation removerCliente
+   * Path part for operation clienteControllerRemoverCliente
    */
-  static readonly RemoverClientePath = '/api/v1/cliente/{id}';
+  static readonly ClienteControllerRemoverClientePath = '/api/v1/cliente/{id}';
 
   /**
    * Método utilizado para remover um cliente pelo id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `removerCliente()` instead.
+   * To access only the response body, use `clienteControllerRemoverCliente()` instead.
    *
    * This method doesn't expect any request body.
    */
-  removerCliente$Response(params: {
+  clienteControllerRemoverCliente$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.RemoverClientePath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.ClienteControllerRemoverClientePath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -181,43 +181,43 @@ export class ClienteControllerService extends BaseService {
    * Método utilizado para remover um cliente pelo id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `removerCliente$Response()` instead.
+   * To access the full response (for headers, for example), `clienteControllerRemoverCliente$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  removerCliente(params: {
+  clienteControllerRemoverCliente(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.removerCliente$Response(params,context).pipe(
+    return this.clienteControllerRemoverCliente$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation incluirCliente
+   * Path part for operation clienteControllerIncluirCliente
    */
-  static readonly IncluirClientePath = '/api/v1/cliente';
+  static readonly ClienteControllerIncluirClientePath = '/api/v1/cliente';
 
   /**
    * Inclusão de cliente
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `incluirCliente()` instead.
+   * To access only the response body, use `clienteControllerIncluirCliente()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  incluirCliente$Response(params: {
+  clienteControllerIncluirCliente$Response(params: {
     body: ClienteDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Cliente>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.IncluirClientePath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.ClienteControllerIncluirClientePath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -238,42 +238,42 @@ export class ClienteControllerService extends BaseService {
    * Inclusão de cliente
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `incluirCliente$Response()` instead.
+   * To access the full response (for headers, for example), `clienteControllerIncluirCliente$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  incluirCliente(params: {
+  clienteControllerIncluirCliente(params: {
     body: ClienteDto
   },
   context?: HttpContext
 
 ): Observable<Cliente> {
 
-    return this.incluirCliente$Response(params,context).pipe(
+    return this.clienteControllerIncluirCliente$Response(params,context).pipe(
       map((r: StrictHttpResponse<Cliente>) => r.body as Cliente)
     );
   }
 
   /**
-   * Path part for operation listAllCliente
+   * Path part for operation clienteControllerListAllCliente
    */
-  static readonly ListAllClientePath = '/api/v1/cliente/listar';
+  static readonly ClienteControllerListAllClientePath = '/api/v1/cliente/listar';
 
   /**
    * Listagem Geral
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listAllCliente()` instead.
+   * To access only the response body, use `clienteControllerListAllCliente()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAllCliente$Response(params?: {
+  clienteControllerListAllCliente$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.ListAllClientePath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.ClienteControllerListAllClientePath, 'get');
     if (params) {
     }
 
@@ -293,42 +293,42 @@ export class ClienteControllerService extends BaseService {
    * Listagem Geral
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listAllCliente$Response()` instead.
+   * To access the full response (for headers, for example), `clienteControllerListAllCliente$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAllCliente(params?: {
+  clienteControllerListAllCliente(params?: {
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.listAllCliente$Response(params,context).pipe(
+    return this.clienteControllerListAllCliente$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation obterPorCpfCliente
+   * Path part for operation clienteControllerObterPorCpfCliente
    */
-  static readonly ObterPorCpfClientePath = '/api/v1/cliente/cpf/{cpf}';
+  static readonly ClienteControllerObterPorCpfClientePath = '/api/v1/cliente/cpf/{cpf}';
 
   /**
    * Método para retornar um cliente pelo cpf
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `obterPorCpfCliente()` instead.
+   * To access only the response body, use `clienteControllerObterPorCpfCliente()` instead.
    *
    * This method doesn't expect any request body.
    */
-  obterPorCpfCliente$Response(params: {
+  clienteControllerObterPorCpfCliente$Response(params: {
     cpf: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<ClienteDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.ObterPorCpfClientePath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, ClienteControllerService.ClienteControllerObterPorCpfClientePath, 'get');
     if (params) {
       rb.path('cpf', params.cpf, {});
     }
@@ -349,18 +349,18 @@ export class ClienteControllerService extends BaseService {
    * Método para retornar um cliente pelo cpf
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `obterPorCpfCliente$Response()` instead.
+   * To access the full response (for headers, for example), `clienteControllerObterPorCpfCliente$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  obterPorCpfCliente(params: {
+  clienteControllerObterPorCpfCliente(params: {
     cpf: number;
   },
   context?: HttpContext
 
 ): Observable<ClienteDto> {
 
-    return this.obterPorCpfCliente$Response(params,context).pipe(
+    return this.clienteControllerObterPorCpfCliente$Response(params,context).pipe(
       map((r: StrictHttpResponse<ClienteDto>) => r.body as ClienteDto)
     );
   }

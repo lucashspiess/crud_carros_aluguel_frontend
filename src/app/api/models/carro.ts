@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+import { Tipo } from './tipo';
 export interface Carro {
   ano?: number;
   cor?: string;
@@ -8,4 +9,5 @@ export interface Carro {
   placa?: string;
   quilometragem?: number;
   status?: string;
+  tipo?: Tipo;
 }

@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 
 import { Carro } from '../models/carro';
 import { CarroDto } from '../models/carro-dto';
-import { CarroIncluirDto } from '../models/carro-incluir-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -25,26 +24,26 @@ export class CarroControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation obterPorPlaca
+   * Path part for operation carroControllerObterPorPlaca
    */
-  static readonly ObterPorPlacaPath = '/api/v1/carro/{placa}';
+  static readonly CarroControllerObterPorPlacaPath = '/api/v1/carro/{placa}';
 
   /**
    * Método para retornar um carro pela placa
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `obterPorPlaca()` instead.
+   * To access only the response body, use `carroControllerObterPorPlaca()` instead.
    *
    * This method doesn't expect any request body.
    */
-  obterPorPlaca$Response(params: {
+  carroControllerObterPorPlaca$Response(params: {
     placa: string;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<CarroDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.ObterPorPlacaPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.CarroControllerObterPorPlacaPath, 'get');
     if (params) {
       rb.path('placa', params.placa, {});
     }
@@ -65,44 +64,44 @@ export class CarroControllerService extends BaseService {
    * Método para retornar um carro pela placa
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `obterPorPlaca$Response()` instead.
+   * To access the full response (for headers, for example), `carroControllerObterPorPlaca$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  obterPorPlaca(params: {
+  carroControllerObterPorPlaca(params: {
     placa: string;
   },
   context?: HttpContext
 
 ): Observable<CarroDto> {
 
-    return this.obterPorPlaca$Response(params,context).pipe(
+    return this.carroControllerObterPorPlaca$Response(params,context).pipe(
       map((r: StrictHttpResponse<CarroDto>) => r.body as CarroDto)
     );
   }
 
   /**
-   * Path part for operation alterarCarro
+   * Path part for operation carroControllerAlterarCarro
    */
-  static readonly AlterarCarroPath = '/api/v1/carro/{placa}';
+  static readonly CarroControllerAlterarCarroPath = '/api/v1/carro/{placa}';
 
   /**
    * Método utilizado para alterar os dados de um carro
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `alterarCarro()` instead.
+   * To access only the response body, use `carroControllerAlterarCarro()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  alterarCarro$Response(params: {
+  carroControllerAlterarCarro$Response(params: {
     placa: string;
-    body: CarroIncluirDto
+    body: CarroDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<CarroDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.AlterarCarroPath, 'put');
+    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.CarroControllerAlterarCarroPath, 'put');
     if (params) {
       rb.path('placa', params.placa, {});
       rb.body(params.body, 'application/json');
@@ -124,44 +123,44 @@ export class CarroControllerService extends BaseService {
    * Método utilizado para alterar os dados de um carro
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `alterarCarro$Response()` instead.
+   * To access the full response (for headers, for example), `carroControllerAlterarCarro$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  alterarCarro(params: {
+  carroControllerAlterarCarro(params: {
     placa: string;
-    body: CarroIncluirDto
+    body: CarroDto
   },
   context?: HttpContext
 
 ): Observable<CarroDto> {
 
-    return this.alterarCarro$Response(params,context).pipe(
+    return this.carroControllerAlterarCarro$Response(params,context).pipe(
       map((r: StrictHttpResponse<CarroDto>) => r.body as CarroDto)
     );
   }
 
   /**
-   * Path part for operation removerCarro
+   * Path part for operation carroControllerRemoverCarro
    */
-  static readonly RemoverCarroPath = '/api/v1/carro/{placa}';
+  static readonly CarroControllerRemoverCarroPath = '/api/v1/carro/{placa}';
 
   /**
    * Método utilizado para remover uma entidiade pela placa informada
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `removerCarro()` instead.
+   * To access only the response body, use `carroControllerRemoverCarro()` instead.
    *
    * This method doesn't expect any request body.
    */
-  removerCarro$Response(params: {
+  carroControllerRemoverCarro$Response(params: {
     placa: string;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.RemoverCarroPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.CarroControllerRemoverCarroPath, 'delete');
     if (params) {
       rb.path('placa', params.placa, {});
     }
@@ -182,43 +181,43 @@ export class CarroControllerService extends BaseService {
    * Método utilizado para remover uma entidiade pela placa informada
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `removerCarro$Response()` instead.
+   * To access the full response (for headers, for example), `carroControllerRemoverCarro$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  removerCarro(params: {
+  carroControllerRemoverCarro(params: {
     placa: string;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.removerCarro$Response(params,context).pipe(
+    return this.carroControllerRemoverCarro$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation incluirCarro
+   * Path part for operation carroControllerIncluirCarro
    */
-  static readonly IncluirCarroPath = '/api/v1/carro';
+  static readonly CarroControllerIncluirCarroPath = '/api/v1/carro';
 
   /**
    * Inclusão de carro
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `incluirCarro()` instead.
+   * To access only the response body, use `carroControllerIncluirCarro()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  incluirCarro$Response(params: {
-    body: CarroIncluirDto
+  carroControllerIncluirCarro$Response(params: {
+    body: CarroDto
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<Carro>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.IncluirCarroPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.CarroControllerIncluirCarroPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -239,43 +238,43 @@ export class CarroControllerService extends BaseService {
    * Inclusão de carro
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `incluirCarro$Response()` instead.
+   * To access the full response (for headers, for example), `carroControllerIncluirCarro$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  incluirCarro(params: {
-    body: CarroIncluirDto
+  carroControllerIncluirCarro(params: {
+    body: CarroDto
   },
   context?: HttpContext
 
 ): Observable<Carro> {
 
-    return this.incluirCarro$Response(params,context).pipe(
+    return this.carroControllerIncluirCarro$Response(params,context).pipe(
       map((r: StrictHttpResponse<Carro>) => r.body as Carro)
     );
   }
 
   /**
-   * Path part for operation desalugar
+   * Path part for operation carroControllerDesalugar
    */
-  static readonly DesalugarPath = '/api/v1/carro/{placa}/desalugar-carro';
+  static readonly CarroControllerDesalugarPath = '/api/v1/carro/{placa}/desalugar-carro';
 
   /**
    * Método utilizado para desalugar um carro
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `desalugar()` instead.
+   * To access only the response body, use `carroControllerDesalugar()` instead.
    *
    * This method doesn't expect any request body.
    */
-  desalugar$Response(params: {
+  carroControllerDesalugar$Response(params: {
     placa: string;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<CarroDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.DesalugarPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.CarroControllerDesalugarPath, 'patch');
     if (params) {
       rb.path('placa', params.placa, {});
     }
@@ -296,43 +295,43 @@ export class CarroControllerService extends BaseService {
    * Método utilizado para desalugar um carro
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `desalugar$Response()` instead.
+   * To access the full response (for headers, for example), `carroControllerDesalugar$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  desalugar(params: {
+  carroControllerDesalugar(params: {
     placa: string;
   },
   context?: HttpContext
 
 ): Observable<CarroDto> {
 
-    return this.desalugar$Response(params,context).pipe(
+    return this.carroControllerDesalugar$Response(params,context).pipe(
       map((r: StrictHttpResponse<CarroDto>) => r.body as CarroDto)
     );
   }
 
   /**
-   * Path part for operation alugar
+   * Path part for operation carroControllerAlugar
    */
-  static readonly AlugarPath = '/api/v1/carro/{placa}/alugar-carro';
+  static readonly CarroControllerAlugarPath = '/api/v1/carro/{placa}/alugar-carro';
 
   /**
    * Método utilizado para alugar um carro
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `alugar()` instead.
+   * To access only the response body, use `carroControllerAlugar()` instead.
    *
    * This method doesn't expect any request body.
    */
-  alugar$Response(params: {
+  carroControllerAlugar$Response(params: {
     placa: string;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<CarroDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.AlugarPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.CarroControllerAlugarPath, 'patch');
     if (params) {
       rb.path('placa', params.placa, {});
     }
@@ -353,42 +352,42 @@ export class CarroControllerService extends BaseService {
    * Método utilizado para alugar um carro
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `alugar$Response()` instead.
+   * To access the full response (for headers, for example), `carroControllerAlugar$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  alugar(params: {
+  carroControllerAlugar(params: {
     placa: string;
   },
   context?: HttpContext
 
 ): Observable<CarroDto> {
 
-    return this.alugar$Response(params,context).pipe(
+    return this.carroControllerAlugar$Response(params,context).pipe(
       map((r: StrictHttpResponse<CarroDto>) => r.body as CarroDto)
     );
   }
 
   /**
-   * Path part for operation listAllCarro
+   * Path part for operation carroControllerListAllCarro
    */
-  static readonly ListAllCarroPath = '/api/v1/carro/listar';
+  static readonly CarroControllerListAllCarroPath = '/api/v1/carro/listar';
 
   /**
    * Listagem Geral
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listAllCarro()` instead.
+   * To access only the response body, use `carroControllerListAllCarro()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAllCarro$Response(params?: {
+  carroControllerListAllCarro$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.ListAllCarroPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.CarroControllerListAllCarroPath, 'get');
     if (params) {
     }
 
@@ -408,17 +407,17 @@ export class CarroControllerService extends BaseService {
    * Listagem Geral
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listAllCarro$Response()` instead.
+   * To access the full response (for headers, for example), `carroControllerListAllCarro$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAllCarro(params?: {
+  carroControllerListAllCarro(params?: {
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.listAllCarro$Response(params,context).pipe(
+    return this.carroControllerListAllCarro$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }

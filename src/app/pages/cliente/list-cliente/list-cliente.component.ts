@@ -34,13 +34,13 @@ export class ListClienteComponent implements OnInit {
   }
 
   private buscarDados() {
-    this.clienteService.listAllCliente().subscribe(data => {
+    this.clienteService.clienteControllerListAllCliente().subscribe(data => {
       this.clienteListaDataSource.data = data;
     })
   }
 
   remover(clienteDto: ClienteDto) {
-    this.clienteService.removerCliente({id: clienteDto.id || 0})
+    this.clienteService.clienteControllerRemoverCliente({id: clienteDto.id || 0})
       .subscribe(retorno => {
           this.buscarDados();
           this.showMensagemSimples("Excluído com sucesso ",5000);

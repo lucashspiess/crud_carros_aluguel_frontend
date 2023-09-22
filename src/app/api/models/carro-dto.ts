@@ -8,4 +8,6 @@ export interface CarroDto {
   placa?: string;
   quilometragem?: number;
   status?: string;
+  tipo_id?: number;
+  tipo_nome?: string;
 }

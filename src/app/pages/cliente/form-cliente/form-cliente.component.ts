@@ -39,7 +39,7 @@ export class FormClienteComponent {
 
   createForm() {
     if (this.acao == "Editar") {
-      this.clienteService.obterPorIdCliente({id: this.id}).subscribe(retorno =>
+      this.clienteService.clienteControllerObterPorIdCliente({id: this.id}).subscribe(retorno =>
         this.formGroup = this.formBuilder.group({
           cpf: [retorno.cpf, Validators.required],
           email: [retorno.email, Validators.required],
@@ -77,7 +77,7 @@ export class FormClienteComponent {
   }
 
   private realizarInclusao() {
-    this.clienteService.incluirCliente({body: this.formGroup.value})
+    this.clienteService.clienteControllerIncluirCliente({body: this.formGroup.value})
       .subscribe(retorno => {
         this.showMensagemSimples("Inclusão realizada com sucesso!");
       }, erro => {
@@ -93,7 +93,7 @@ export class FormClienteComponent {
     const paramId = this.route.snapshot.paramMap.get('id');
     if (paramId) {
       const id = parseInt(paramId);
-      this.clienteService.obterPorIdCliente({id: id}).subscribe(
+      this.clienteService.clienteControllerObterPorIdCliente({id: id}).subscribe(
         retorno => {
           this.acao = this.ACAO_EDITAR;
           this.id = retorno.id || 0;
@@ -104,7 +104,7 @@ export class FormClienteComponent {
   }
 
   private realizarEdicao() {
-    this.clienteService.alterarCliente({id: this.id, body: this.formGroup.value})
+    this.clienteService.clienteControllerAlterarCliente({id: this.id, body: this.formGroup.value})
       .subscribe(retorno => {
         this.showMensagemSimples("Edição realizada com sucesso!")
         this.router.navigateByUrl("/cliente");

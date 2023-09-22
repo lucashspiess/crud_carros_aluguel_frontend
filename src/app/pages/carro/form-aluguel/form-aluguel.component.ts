@@ -52,7 +52,7 @@ export class FormAluguelComponent {
         this.data_fim = new Date(paramFim);
         this.cpf = parseInt(paramCpf);
       }
-      this.carroService.obterPorPlaca({placa: placa}).subscribe(
+      this.carroService.carroControllerObterPorPlaca({placa: placa}).subscribe(
         retorno => {
           this.placa = retorno.placa || "";
           this.formGroup.patchValue({placa: retorno.placa});
@@ -87,8 +87,8 @@ export class FormAluguelComponent {
   }
 
   confirmarAluguel(aluguelDto: AluguelDto) {
-    this.carroService.obterPorPlaca({placa: aluguelDto.placa || ""}).subscribe(retorno => {
-      this.aluguelService.incluirAluguel({placa: aluguelDto.placa || "", cpf: aluguelDto.cpf_cliente || 0,body: aluguelDto}).subscribe(retorno1 => {
+    this.carroService.carroControllerObterPorPlaca({placa: aluguelDto.placa || ""}).subscribe(retorno => {
+      this.aluguelService.aluguelControllerIncluirAluguel({placa: aluguelDto.placa || "", cpf: aluguelDto.cpf_cliente || 0,body: aluguelDto}).subscribe(retorno1 => {
         const dialogRef = this.dialog.open(ConfirmationDialog, {
           data: {
             titulo: 'Confirmar?',
@@ -105,7 +105,7 @@ export class FormAluguelComponent {
             this.showMensagemSimples("Aluguel realizado com sucesso!");
             this.atualizar();
           } else {
-            this.aluguelService.removerAluguel({id: retorno1.id || 0}).subscribe();
+            this.aluguelService.aluguelControllerRemoverAluguel({id: retorno1.id || 0}).subscribe();
           }
         });
       })
@@ -113,7 +113,7 @@ export class FormAluguelComponent {
   }
 
   verificarCliente(aluguelDto: AluguelDto) {
-    this.clienteService.obterPorCpfCliente({cpf: aluguelDto.cpf_cliente || 0}).subscribe(retorno =>{
+    this.clienteService.clienteControllerObterPorCpfCliente({cpf: aluguelDto.cpf_cliente || 0}).subscribe(retorno =>{
       this.confirmarAluguel(aluguelDto);
       }
     , error => {

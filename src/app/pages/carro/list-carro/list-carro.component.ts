@@ -34,13 +34,13 @@ export class ListCarroComponent implements OnInit {
   }
 
   private buscarDados() {
-    this.carroService.listAllCarro().subscribe(data => {
+    this.carroService.carroControllerListAllCarro().subscribe(data => {
       this.carroListaDataSource.data = data;
     })
   }
 
   remover(carroDto: CarroDto) {
-    this.carroService.removerCarro({placa: carroDto.placa || ""})
+    this.carroService.carroControllerRemoverCarro({placa: carroDto.placa || ""})
       .subscribe(retorno => {
           this.buscarDados();
           this.showMensagemSimples("Excluído com sucesso ",5000);
@@ -105,9 +105,9 @@ export class ListCarroComponent implements OnInit {
   }
 
   desalugar(placa: string){
-    this.carroService.desalugar({placa: placa}).subscribe(retorno1 =>
-      this.aluguelService.obterPelaPlaca({placa: placa}).subscribe(retorno=>
-        this.aluguelService.removerAluguel({id: retorno.id || 0}).subscribe()
+    this.carroService.carroControllerDesalugar({placa: placa}).subscribe(retorno1 =>
+      this.aluguelService.aluguelControllerObterPelaPlaca({placa: placa}).subscribe(retorno=>
+        this.aluguelService.aluguelControllerRemoverAluguel({id: retorno.id || 0}).subscribe()
       )
     );
     this.showMensagemSimples("Carro devolvido com sucesso!");

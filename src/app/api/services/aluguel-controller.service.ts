@@ -23,19 +23,19 @@ export class AluguelControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation alterarAluguel
+   * Path part for operation aluguelControllerAlterarAluguel
    */
-  static readonly AlterarAluguelPath = '/api/v1/aluguel/{id}';
+  static readonly AluguelControllerAlterarAluguelPath = '/api/v1/aluguel/{id}';
 
   /**
    * Método utilizado para alterar os dados de um aluguel
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `alterarAluguel()` instead.
+   * To access only the response body, use `aluguelControllerAlterarAluguel()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  alterarAluguel$Response(params: {
+  aluguelControllerAlterarAluguel$Response(params: {
     id: number;
     body: AluguelDto
   },
@@ -43,7 +43,7 @@ export class AluguelControllerService extends BaseService {
 
 ): Observable<StrictHttpResponse<AluguelDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.AlterarAluguelPath, 'put');
+    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.AluguelControllerAlterarAluguelPath, 'put');
     if (params) {
       rb.path('id', params.id, {});
       rb.body(params.body, 'application/json');
@@ -65,11 +65,11 @@ export class AluguelControllerService extends BaseService {
    * Método utilizado para alterar os dados de um aluguel
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `alterarAluguel$Response()` instead.
+   * To access the full response (for headers, for example), `aluguelControllerAlterarAluguel$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  alterarAluguel(params: {
+  aluguelControllerAlterarAluguel(params: {
     id: number;
     body: AluguelDto
   },
@@ -77,32 +77,32 @@ export class AluguelControllerService extends BaseService {
 
 ): Observable<AluguelDto> {
 
-    return this.alterarAluguel$Response(params,context).pipe(
+    return this.aluguelControllerAlterarAluguel$Response(params,context).pipe(
       map((r: StrictHttpResponse<AluguelDto>) => r.body as AluguelDto)
     );
   }
 
   /**
-   * Path part for operation removerAluguel
+   * Path part for operation aluguelControllerRemoverAluguel
    */
-  static readonly RemoverAluguelPath = '/api/v1/aluguel/{id}';
+  static readonly AluguelControllerRemoverAluguelPath = '/api/v1/aluguel/{id}';
 
   /**
    * Método utilizado para remover um aluguel pelo id informado
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `removerAluguel()` instead.
+   * To access only the response body, use `aluguelControllerRemoverAluguel()` instead.
    *
    * This method doesn't expect any request body.
    */
-  removerAluguel$Response(params: {
+  aluguelControllerRemoverAluguel$Response(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.RemoverAluguelPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.AluguelControllerRemoverAluguelPath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -123,36 +123,36 @@ export class AluguelControllerService extends BaseService {
    * Método utilizado para remover um aluguel pelo id informado
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `removerAluguel$Response()` instead.
+   * To access the full response (for headers, for example), `aluguelControllerRemoverAluguel$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  removerAluguel(params: {
+  aluguelControllerRemoverAluguel(params: {
     id: number;
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.removerAluguel$Response(params,context).pipe(
+    return this.aluguelControllerRemoverAluguel$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }
 
   /**
-   * Path part for operation incluirAluguel
+   * Path part for operation aluguelControllerIncluirAluguel
    */
-  static readonly IncluirAluguelPath = '/api/v1/aluguel/{placa}/{cpf}';
+  static readonly AluguelControllerIncluirAluguelPath = '/api/v1/aluguel/{placa}/{cpf}';
 
   /**
    * Inclusão de aluguel
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `incluirAluguel()` instead.
+   * To access only the response body, use `aluguelControllerIncluirAluguel()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  incluirAluguel$Response(params: {
+  aluguelControllerIncluirAluguel$Response(params: {
     placa: string;
     cpf: number;
     body: AluguelDto
@@ -161,7 +161,7 @@ export class AluguelControllerService extends BaseService {
 
 ): Observable<StrictHttpResponse<AluguelDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.IncluirAluguelPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.AluguelControllerIncluirAluguelPath, 'post');
     if (params) {
       rb.path('placa', params.placa, {});
       rb.path('cpf', params.cpf, {});
@@ -184,11 +184,11 @@ export class AluguelControllerService extends BaseService {
    * Inclusão de aluguel
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `incluirAluguel$Response()` instead.
+   * To access the full response (for headers, for example), `aluguelControllerIncluirAluguel$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  incluirAluguel(params: {
+  aluguelControllerIncluirAluguel(params: {
     placa: string;
     cpf: number;
     body: AluguelDto
@@ -197,32 +197,32 @@ export class AluguelControllerService extends BaseService {
 
 ): Observable<AluguelDto> {
 
-    return this.incluirAluguel$Response(params,context).pipe(
+    return this.aluguelControllerIncluirAluguel$Response(params,context).pipe(
       map((r: StrictHttpResponse<AluguelDto>) => r.body as AluguelDto)
     );
   }
 
   /**
-   * Path part for operation obterPelaPlaca
+   * Path part for operation aluguelControllerObterPelaPlaca
    */
-  static readonly ObterPelaPlacaPath = '/api/v1/aluguel/{placa}';
+  static readonly AluguelControllerObterPelaPlacaPath = '/api/v1/aluguel/{placa}';
 
   /**
    * Inclusão de aluguel
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `obterPelaPlaca()` instead.
+   * To access only the response body, use `aluguelControllerObterPelaPlaca()` instead.
    *
    * This method doesn't expect any request body.
    */
-  obterPelaPlaca$Response(params: {
+  aluguelControllerObterPelaPlaca$Response(params: {
     placa: string;
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<AluguelDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.ObterPelaPlacaPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.AluguelControllerObterPelaPlacaPath, 'get');
     if (params) {
       rb.path('placa', params.placa, {});
     }
@@ -243,42 +243,42 @@ export class AluguelControllerService extends BaseService {
    * Inclusão de aluguel
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `obterPelaPlaca$Response()` instead.
+   * To access the full response (for headers, for example), `aluguelControllerObterPelaPlaca$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  obterPelaPlaca(params: {
+  aluguelControllerObterPelaPlaca(params: {
     placa: string;
   },
   context?: HttpContext
 
 ): Observable<AluguelDto> {
 
-    return this.obterPelaPlaca$Response(params,context).pipe(
+    return this.aluguelControllerObterPelaPlaca$Response(params,context).pipe(
       map((r: StrictHttpResponse<AluguelDto>) => r.body as AluguelDto)
     );
   }
 
   /**
-   * Path part for operation listAllAluguel
+   * Path part for operation aluguelControllerListAllAluguel
    */
-  static readonly ListAllAluguelPath = '/api/v1/aluguel/listar';
+  static readonly AluguelControllerListAllAluguelPath = '/api/v1/aluguel/listar';
 
   /**
    * Listagem Geral
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listAllAluguel()` instead.
+   * To access only the response body, use `aluguelControllerListAllAluguel()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAllAluguel$Response(params?: {
+  aluguelControllerListAllAluguel$Response(params?: {
   },
   context?: HttpContext
 
 ): Observable<StrictHttpResponse<any>> {
 
-    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.ListAllAluguelPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.AluguelControllerListAllAluguelPath, 'get');
     if (params) {
     }
 
@@ -298,17 +298,17 @@ export class AluguelControllerService extends BaseService {
    * Listagem Geral
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listAllAluguel$Response()` instead.
+   * To access the full response (for headers, for example), `aluguelControllerListAllAluguel$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  listAllAluguel(params?: {
+  aluguelControllerListAllAluguel(params?: {
   },
   context?: HttpContext
 
 ): Observable<any> {
 
-    return this.listAllAluguel$Response(params,context).pipe(
+    return this.aluguelControllerListAllAluguel$Response(params,context).pipe(
       map((r: StrictHttpResponse<any>) => r.body as any)
     );
   }

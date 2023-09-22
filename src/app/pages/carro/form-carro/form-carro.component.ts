@@ -35,7 +35,7 @@ export class FormCarroComponent {
 
   createForm() {
     if(this.acao == "Editar"){
-      this.carroService.obterPorPlaca({placa: this.placa}).subscribe(retorno =>
+      this.carroService.carroControllerObterPorPlaca({placa: this.placa}).subscribe(retorno =>
         this.formGroup = this.formBuilder.group({
           ano: [retorno.ano, Validators.required],
           modelo: [retorno.modelo, Validators.required],
@@ -69,7 +69,7 @@ export class FormCarroComponent {
   }
 
   private realizarInclusao() {
-    this.carroService.incluirCarro({body: this.formGroup.value})
+    this.carroService.carroControllerIncluirCarro({body: this.formGroup.value})
       .subscribe(retorno => {
         this.showMensagemSimples("Inclusão realizada com sucesso!");
       }, erro => {
@@ -85,7 +85,7 @@ export class FormCarroComponent {
     const paramPlaca = this.route.snapshot.paramMap.get('placa');
     if (paramPlaca) {
       const placa = paramPlaca;
-      this.carroService.obterPorPlaca({placa: placa}).subscribe(
+      this.carroService.carroControllerObterPorPlaca({placa: placa}).subscribe(
         retorno => {
           this.acao = this.ACAO_EDITAR;
           this.placa = retorno.placa || "";
@@ -96,7 +96,7 @@ export class FormCarroComponent {
   }
 
   private realizarEdicao() {
-    this.carroService.alterarCarro({placa: this.placa, body: this.formGroup.value})
+    this.carroService.carroControllerAlterarCarro({placa: this.placa, body: this.formGroup.value})
       .subscribe(retorno => {
         this.showMensagemSimples("Edição realizada com sucesso!")
         this.router.navigateByUrl("/carro");
