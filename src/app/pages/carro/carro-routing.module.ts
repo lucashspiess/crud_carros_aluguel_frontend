@@ -15,11 +15,11 @@ export const carroRoutes: Routes = [
         component: ListCarroComponent
       },
       {
-        path: ":placa/:cpf/:data_inicio/:data_fim/aluguel",
+        path: ":carro_placa/:cpf/:data_inicio/:data_fim/aluguel",
         component: FormAluguelComponent
       },
       {
-        path: ":placa/aluguel",
+        path: ":carro_placa/aluguel",
         component: FormAluguelComponent
       },
       {

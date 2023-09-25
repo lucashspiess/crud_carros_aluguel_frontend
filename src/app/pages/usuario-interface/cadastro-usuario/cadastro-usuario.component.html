@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="viewport"content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="cadastro-usuario.component.scss">
+
+  <title>Login</title>
+
+</head>
+
+<body>
+
+<div id="login">
+
+  <form
+    [formGroup]="formGroup"
+    (ngSubmit)="onSubmit()"
+    class="card"
+  >
+
+    <div class="card-header">
+
+      <h2>Cadastro</h2>
+
+    </div>
+
+    <div class="card-content">
+
+      <div class="card-content-area">
+
+        <mat-form-field>
+          <mat-label>Nome De Usuário</mat-label>
+          <input matInput formControlName="nome">
+          <mat-error *ngIf="handleError('nome', 'required')">
+            O nome é obrigatório
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="card-content-area">
+
+        <mat-form-field>
+          <mat-label>Login</mat-label>
+          <input matInput formControlName="login">
+          <mat-error *ngIf="handleError('login', 'required')">
+            O login é obrigatório
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="card-content-area">
+
+        <mat-form-field>
+          <mat-label>E-Mail</mat-label>
+          <input matInput formControlName="email">
+          <mat-error *ngIf="handleError('email', 'required')">
+            O email é obrigatório
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="card-content-area">
+
+        <mat-form-field>
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="senha" type="password" title="Senha"
+                 placeholder="Senha">
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+    <div class="card-footer">
+
+      <button mat-raised-button color="primary" type="submit" title="Entrar" class="button">
+        <span>Cadastrar</span>
+      </button>
+
+      <button mat-raised-button color="primary" [routerLink]="['/']" title="voltar" class="button">
+        <span>Voltar</span>
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
+
+</body>
+
+</html>

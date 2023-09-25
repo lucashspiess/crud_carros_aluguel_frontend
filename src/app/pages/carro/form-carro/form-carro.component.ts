@@ -5,6 +5,9 @@ import {CarroControllerService} from "../../../api/services/carro-controller.ser
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
+import {SecurityService} from "../../../arquitetura/security/security.service";
+import {TipoDto} from "../../../api/models/tipo-dto";
+import {TipoControllerService} from "../../../api/services/tipo-controller.service";
 
 @Component({
   selector: 'app-form-carro',
@@ -18,6 +21,7 @@ export class FormCarroComponent {
 
   acao: string = this.ACAO_INCLUIR;
   placa!: string;
+  tipos: TipoDto[] = [];
 
   constructor(
     private router: Router,
@@ -26,11 +30,20 @@ export class FormCarroComponent {
     private _adapter: DateAdapter<any>,
     public carroService: CarroControllerService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private tipoService: TipoControllerService,
+    private securityService: SecurityService
   ) {
+    this.carregarDados();
     this.createForm();
     this._adapter.setLocale('pt-br');
     this.prepararEdicao();
+  }
+
+  ngOnInit(){
+    if (!this.securityService.hasRoles(["ROLE_ADMIN"])) {
+      this.router.navigate(['/']);
+    }
   }
 
   createForm() {
@@ -42,7 +55,7 @@ export class FormCarroComponent {
           cor: [retorno.cor, Validators.required],
           placa: [retorno.placa],
           diaria: [retorno.diaria],
-          quilometragem: [retorno.quilometragem, Validators.required]
+          quilometragem: [retorno.quilometragem, Validators.required],
         }));
     }else{
         this.formGroup = this.formBuilder.group({
@@ -51,7 +64,8 @@ export class FormCarroComponent {
           cor: [null, Validators.required],
           placa: [null, Validators.required],
           diaria: [null, Validators.required],
-          quilometragem: [null, Validators.required]
+          quilometragem: [null, Validators.required],
+          tipo_id: [null, Validators.required]
         })
     }
   }
@@ -116,5 +130,12 @@ export class FormCarroComponent {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigateByUrl('/carro');
     });
+  }
+
+   carregarDados() {
+    this.tipos = this.route.snapshot.data['tipos'];
+    this.tipoService.tipoControllerListAll().subscribe(value => {
+      this.tipos = value;
+    })
   }
 }

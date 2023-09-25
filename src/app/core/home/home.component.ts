@@ -9,6 +9,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {CarroDto} from "../../api/models/carro-dto";
 import {ConfirmationDialog} from "../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {SecurityService} from "../../arquitetura/security/security.service";
+import {MessageService} from "../../arquitetura/message/message.service";
 
 
 @UntilDestroy()
@@ -20,12 +22,30 @@ import {MatDialog} from "@angular/material/dialog";
 export class HomeComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
+  admin!: boolean;
 
   constructor(
     private observer: BreakpointObserver,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private mensageService: MessageService,
+    private securityService: SecurityService
   ) {
+  }
+
+  ngOnInit(): void {
+    if(this.securityService.credential.accessToken == ""){
+      this.router.navigate(['/acesso']);
+    }else {
+
+      if (this.securityService.isValid()) {
+        this.router.navigate(['/']);
+        this.admin = !this.securityService.hasRoles(['ROLE_ADMIN'])
+        console.log(this.securityService)
+      }
+      if (!this.securityService.isValid())
+        this.router.navigate(['/acesso']);
+    }
   }
 
   ngAfterViewInit() {
@@ -58,7 +78,7 @@ export class HomeComponent {
     const dialogRef = this.dialog.open(ConfirmationDialog, {
       data: {
         titulo: 'Sobre',
-        mensagem: 'Sistema para controle de carros para aluguel - versão: 1.1',
+        mensagem: 'Sistema para controle de carros para aluguel - versão: 2.0',
         textoBotoes: {
           ok: 'Ok'
         },
@@ -76,5 +96,10 @@ export class HomeComponent {
         },
       },
     });
+  }
+
+  sair() {
+    this.securityService.invalidate();
+    this.router.navigate(['/login']);
   }
 }

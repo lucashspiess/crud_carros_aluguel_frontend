@@ -1,5 +1,6 @@
 export { FieldResponse } from './models/field-response';
 export { MessageResponse } from './models/message-response';
+export { UsuarioDto } from './models/usuario-dto';
 export { TipoDto } from './models/tipo-dto';
 export { ClienteDto } from './models/cliente-dto';
 export { CarroDto } from './models/carro-dto';

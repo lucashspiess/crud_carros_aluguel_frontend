@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ClienteControllerService} from "../../../api/services/cliente-controller.service";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
   selector: 'app-form-cliente',
@@ -30,11 +31,18 @@ export class FormClienteComponent {
     private _adapter: DateAdapter<any>,
     public clienteService: ClienteControllerService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private securityService: SecurityService
   ) {
     this.createForm();
     this._adapter.setLocale('pt-br');
     this.prepararEdicao();
+  }
+
+  ngOnInit(){
+    if (!this.securityService.hasRoles(["ROLE_ADMIN"])) {
+      this.router.navigate(['/']);
+    }
   }
 
   createForm() {

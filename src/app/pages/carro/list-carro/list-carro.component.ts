@@ -17,7 +17,7 @@ import {AluguelControllerService} from "../../../api/services/aluguel-controller
   styleUrls: ['./list-carro.component.scss']
 })
 export class ListCarroComponent implements OnInit {
-  colunasMostrar = ['modelo', 'cor', 'ano', 'quilometragem','placa','status','diaria', 'acao'];
+  colunasMostrar = ['modelo','tipo', 'cor', 'ano', 'quilometragem','placa','status','diaria', 'acao'];
   carroListaDataSource: MatTableDataSource<CarroDto> = new MatTableDataSource<CarroDto>([]);
 
   constructor(
@@ -105,11 +105,7 @@ export class ListCarroComponent implements OnInit {
   }
 
   desalugar(placa: string){
-    this.carroService.carroControllerDesalugar({placa: placa}).subscribe(retorno1 =>
-      this.aluguelService.aluguelControllerObterPelaPlaca({placa: placa}).subscribe(retorno=>
-        this.aluguelService.aluguelControllerRemoverAluguel({id: retorno.id || 0}).subscribe()
-      )
-    );
+    this.carroService.carroControllerDesalugar({placa: placa}).subscribe();
     this.showMensagemSimples("Carro devolvido com sucesso!");
     this.atualizar();
   }

@@ -1,3 +1,4 @@
+export { UsuarioControllerService } from './services/usuario-controller.service';
 export { TipoControllerService } from './services/tipo-controller.service';
 export { ClienteControllerService } from './services/cliente-controller.service';
 export { CarroControllerService } from './services/carro-controller.service';

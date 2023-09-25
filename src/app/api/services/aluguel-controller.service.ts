@@ -203,63 +203,6 @@ export class AluguelControllerService extends BaseService {
   }
 
   /**
-   * Path part for operation aluguelControllerObterPelaPlaca
-   */
-  static readonly AluguelControllerObterPelaPlacaPath = '/api/v1/aluguel/{placa}';
-
-  /**
-   * Inclusão de aluguel
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `aluguelControllerObterPelaPlaca()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  aluguelControllerObterPelaPlaca$Response(params: {
-    placa: string;
-  },
-  context?: HttpContext
-
-): Observable<StrictHttpResponse<AluguelDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, AluguelControllerService.AluguelControllerObterPelaPlacaPath, 'get');
-    if (params) {
-      rb.path('placa', params.placa, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json',
-      context: context
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<AluguelDto>;
-      })
-    );
-  }
-
-  /**
-   * Inclusão de aluguel
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `aluguelControllerObterPelaPlaca$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  aluguelControllerObterPelaPlaca(params: {
-    placa: string;
-  },
-  context?: HttpContext
-
-): Observable<AluguelDto> {
-
-    return this.aluguelControllerObterPelaPlaca$Response(params,context).pipe(
-      map((r: StrictHttpResponse<AluguelDto>) => r.body as AluguelDto)
-    );
-  }
-
-  /**
    * Path part for operation aluguelControllerListAllAluguel
    */
   static readonly AluguelControllerListAllAluguelPath = '/api/v1/aluguel/listar';

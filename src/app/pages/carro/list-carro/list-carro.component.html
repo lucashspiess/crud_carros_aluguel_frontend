@@ -11,6 +11,11 @@
       <td mat-cell class="coluna" *matCellDef="let element"> {{element.modelo}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="tipo">
+      <th mat-header-cell class="coluna" *matHeaderCellDef> Tipo </th>
+      <td mat-cell class="coluna" *matCellDef="let element"> {{element.tipo_nome}} </td>
+    </ng-container>
+
     <!-- Name Column -->
     <ng-container matColumnDef="placa">
       <th mat-header-cell class="coluna" *matHeaderCellDef> Placa </th>

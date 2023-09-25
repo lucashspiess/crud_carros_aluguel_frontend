@@ -28,6 +28,14 @@
       <mat-icon>person</mat-icon>
       <span>Clientes</span>
     </button>
+    <button mat-button class="menu-button" routerLink="/aluguel">
+      <mat-icon>calendar_today</mat-icon>
+      <span>Aluguéis</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/tipo">
+      <mat-icon>commute</mat-icon>
+      <span>Tipo</span>
+    </button>
     <button mat-button class="menu-button" (click)="mostrarSobre()">
       <mat-icon>info</mat-icon>
       <span>Sobre</span>
@@ -39,10 +47,22 @@
       <mat-icon>help</mat-icon>
       <span>Ajuda</span>
     </button>
+
+    <button mat-button class="menu-button" (click)="sair()">
+      <mat-icon>logout</mat-icon>
+      <span>Sair</span>
+    </button>
+
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
       <router-outlet></router-outlet>
     </div>
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" (click)="sair()">
+      <mat-icon>logout</mat-icon>
+      <span>Sair</span>
+    </button>
   </mat-sidenav-content>
 </mat-sidenav-container>

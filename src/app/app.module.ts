@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './core/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,12 +18,24 @@ import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dial
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {ClienteModule} from "./pages/cliente/cliente.module";
+import {LoaderDialogComponent} from "./arquitetura/loader-dialog/loader-dialog.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {AutenticacaoModule} from "./arquitetura/autenticacao/autenticacao.module";
+import {MessageModule} from "./arquitetura/message/message.module";
+import {SecurityModule} from "./arquitetura/security/security.module";
+import {UsuarioInterfaceModule} from "./pages/usuario-interface/usuario-interface.module";
+import {AppInterceptor} from "./arquitetura/app.interceptor";
+import {SecurityInterceptor} from "./arquitetura/security/security.interceptor";
+import {LoaderModule} from "./arquitetura/loader/loader.module";
+import {TipoModule} from "./pages/tipo/tipo.module";
+import {AluguelModule} from "./pages/aluguel/aluguel.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ConfirmationDialog,
+    LoaderDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +51,33 @@ import {ClienteModule} from "./pages/cliente/cliente.module";
     MatDialogModule,
     MatSnackBarModule,
     ClienteModule,
+    TipoModule,
+    AluguelModule,
+    UsuarioInterfaceModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    AutenticacaoModule,
+    LoaderModule,
+    MessageModule.forRoot(),
+    SecurityModule,//TODO conferir a configuração
+    SecurityModule.forRoot({
+      nameStorage: 'portalSSOSecurityStorage',
+      loginRouter: '/acesso/login'
+    }),
   ],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SecurityInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

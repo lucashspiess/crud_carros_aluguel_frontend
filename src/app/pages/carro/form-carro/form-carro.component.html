@@ -20,6 +20,14 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field>
+      <mat-label>Tipo:</mat-label>
+      <mat-select formControlName="tipo_id">
+        <mat-option>Selecione</mat-option>
+        <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.nome}}</mat-option>
+      </mat-select>
+      <mat-error validationMessage>    </mat-error>
+    </mat-form-field>
+    <mat-form-field>
       <mat-label>Ano:</mat-label>
       <input matInput formControlName="ano" type="number" min="2000" max="2024">
       <mat-error *ngIf="handleError('ano', 'required')">

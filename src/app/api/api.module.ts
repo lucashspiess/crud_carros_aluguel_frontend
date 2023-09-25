@@ -4,6 +4,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
+import { UsuarioControllerService } from './services/usuario-controller.service';
 import { TipoControllerService } from './services/tipo-controller.service';
 import { ClienteControllerService } from './services/cliente-controller.service';
 import { CarroControllerService } from './services/carro-controller.service';
@@ -18,6 +19,7 @@ import { AluguelControllerService } from './services/aluguel-controller.service'
   exports: [],
   declarations: [],
   providers: [
+    UsuarioControllerService,
     TipoControllerService,
     ClienteControllerService,
     CarroControllerService,

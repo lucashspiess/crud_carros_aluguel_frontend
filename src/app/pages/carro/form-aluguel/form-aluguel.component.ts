@@ -20,10 +20,10 @@ import {ClienteControllerService} from "../../../api/services/cliente-controller
 })
 export class FormAluguelComponent {
   formGroup!: FormGroup;
-  placa!: string;
+  carro_placa!: string;
   cpf!: number;
-  data_inicio: Date = new Date();
-  data_fim: Date = new Date();
+  data_inicio: any = new Date();
+  data_fim: any = new Date();
 
   constructor(
     private router: Router,
@@ -41,7 +41,7 @@ export class FormAluguelComponent {
   }
 
   createForm() {
-    const paramPlaca = this.route.snapshot.paramMap.get('placa');
+    const paramPlaca = this.route.snapshot.paramMap.get('carro_placa');
     const paramCpf = this.route.snapshot.paramMap.get('cpf');
     const paramInicio = this.route.snapshot.paramMap.get('data_inicio');
     const paramFim = this.route.snapshot.paramMap.get('data_fim');
@@ -54,12 +54,12 @@ export class FormAluguelComponent {
       }
       this.carroService.carroControllerObterPorPlaca({placa: placa}).subscribe(
         retorno => {
-          this.placa = retorno.placa || "";
-          this.formGroup.patchValue({placa: retorno.placa});
+          this.carro_placa = retorno.placa || "";
+          this.formGroup.patchValue({carro_placa: retorno.placa});
         }
       )
       this.formGroup = this.formBuilder.group({
-        placa: [placa, Validators.required],
+        carro_placa: [placa, Validators.required],
         cpf_cliente: [this.cpf, Validators.required],
         data_inicio: [new Date(this.data_inicio), Validators.required],
         data_fim: [new Date(this.data_fim), Validators.required],
@@ -87,8 +87,10 @@ export class FormAluguelComponent {
   }
 
   confirmarAluguel(aluguelDto: AluguelDto) {
-    this.carroService.carroControllerObterPorPlaca({placa: aluguelDto.placa || ""}).subscribe(retorno => {
-      this.aluguelService.aluguelControllerIncluirAluguel({placa: aluguelDto.placa || "", cpf: aluguelDto.cpf_cliente || 0,body: aluguelDto}).subscribe(retorno1 => {
+    aluguelDto.data_inicio = this._adapter.parse(aluguelDto.data_inicio,"dd-MM-yyyy").toLocaleDateString();
+    aluguelDto.data_fim = this._adapter.parse(aluguelDto.data_fim,"dd-MM-yyyy").toLocaleDateString();
+    this.carroService.carroControllerObterPorPlaca({placa: aluguelDto.carro_placa || ""}).subscribe(retorno => {
+      this.aluguelService.aluguelControllerIncluirAluguel({placa: aluguelDto.carro_placa || "", cpf: aluguelDto.cpf_cliente || 0,body: aluguelDto}).subscribe(retorno1 => {
         const dialogRef = this.dialog.open(ConfirmationDialog, {
           data: {
             titulo: 'Confirmar?',
@@ -114,9 +116,9 @@ export class FormAluguelComponent {
 
   verificarCliente(aluguelDto: AluguelDto) {
     this.clienteService.clienteControllerObterPorCpfCliente({cpf: aluguelDto.cpf_cliente || 0}).subscribe(retorno =>{
-      this.confirmarAluguel(aluguelDto);
+        this.confirmarAluguel(aluguelDto);
       }
-    , error => {
+      , error => {
         const dialogRef = this.dialog.open(ConfirmationDialog, {
           data: {
             titulo: 'Não cadastrado',
@@ -132,7 +134,7 @@ export class FormAluguelComponent {
             const paramInicio = new Date(aluguelDto.data_inicio || "");
             const paramFim = new Date(aluguelDto.data_fim || "");
             this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-              this.router.navigateByUrl(`/cliente/novo/${aluguelDto.cpf_cliente}/${paramInicio.toISOString()}/${paramFim.toISOString()}/${aluguelDto.placa}`);
+              this.router.navigateByUrl(`/cliente/novo/${aluguelDto.cpf_cliente}/${paramInicio.toISOString()}/${paramFim.toISOString()}/${aluguelDto.carro_placa}`);
             });
           }
         });

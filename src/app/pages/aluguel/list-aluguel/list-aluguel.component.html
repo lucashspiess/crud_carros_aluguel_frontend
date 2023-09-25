@@ -1,0 +1,34 @@
+<section class="example-container mat-elevation-z8" tabindex="0">
+  <table mat-table [dataSource]="aluguelListaDataSource">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="cpf_cliente">
+      <th mat-header-cell class="coluna" *matHeaderCellDef> CPF do cliente </th>
+      <td mat-cell class="coluna" *matCellDef="let element"> {{element.cpf_cliente}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="placa">
+      <th mat-header-cell class="coluna" *matHeaderCellDef> Placa </th>
+      <td mat-cell class="coluna" *matCellDef="let element"> {{element.carro_placa}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="data_inicio">
+      <th mat-header-cell class="coluna" *matHeaderCellDef> Data de início </th>
+      <td mat-cell class="coluna" *matCellDef="let element"> {{element.data_inicio}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="data_fim">
+      <th mat-header-cell class="coluna" *matHeaderCellDef> Data de fim </th>
+      <td mat-cell class="coluna" *matCellDef="let element"> {{element.data_fim}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="valor">
+      <th mat-header-cell class="coluna" *matHeaderCellDef> Valor </th>
+      <td mat-cell class="coluna" *matCellDef="let element"> R$ {{element.valor}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="colunasMostrar; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: colunasMostrar;"></tr>
+  </table>
+</section>
