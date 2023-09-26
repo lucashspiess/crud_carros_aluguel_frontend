@@ -32,7 +32,8 @@
       <mat-icon>calendar_today</mat-icon>
       <span>Aluguéis</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/tipo">
+    <button mat-button class="menu-button" routerLink="/tipo"
+            *ngIf="securityService.hasRoles('ROLE_ADMIN')">
       <mat-icon>commute</mat-icon>
       <span>Tipos</span>
     </button>
@@ -58,11 +59,5 @@
     <div class="content mat-elevation-z8">
       <router-outlet></router-outlet>
     </div>
-    <mat-divider></mat-divider>
-
-    <button mat-button class="menu-button" (click)="sair()">
-      <mat-icon>logout</mat-icon>
-      <span>Sair</span>
-    </button>
   </mat-sidenav-content>
 </mat-sidenav-container>

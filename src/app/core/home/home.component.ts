@@ -29,7 +29,7 @@ export class HomeComponent {
     private router: Router,
     private dialog: MatDialog,
     private mensageService: MessageService,
-    private securityService: SecurityService
+    public securityService: SecurityService
   ) {
   }
 
@@ -41,7 +41,6 @@ export class HomeComponent {
       if (this.securityService.isValid()) {
         this.router.navigate(['/']);
         this.admin = !this.securityService.hasRoles(['ROLE_ADMIN'])
-        console.log(this.securityService)
       }
       if (!this.securityService.isValid())
         this.router.navigate(['/acesso']);
@@ -90,7 +89,7 @@ export class HomeComponent {
     const dialogRef = this.dialog.open(ConfirmationDialog, {
       data: {
         titulo: 'Ajuda',
-        mensagem: 'Caso tenha algum problema, mande um email para: lucashs725@gmail.com',
+        mensagem: 'Caso tenha algum problema, envie email para o endereço lucashs725@gmail.com',
         textoBotoes: {
           ok: 'Ok'
         },

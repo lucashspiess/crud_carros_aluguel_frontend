@@ -1,9 +1,15 @@
 <section class="example-container mat-elevation-z8" tabindex="0">
-  <button mat-raised-button color="primary" [routerLink]="['/carro','novo']">
+  <button mat-raised-button color="primary" [routerLink]="['/carro','novo']"
+          *ngIf="securityService.hasRoles('ROLE_ADMIN')">
     <mat-icon>add</mat-icon>
     <span>Adicionar</span>
   </button>
   <table mat-table [dataSource]="carroListaDataSource">
+
+    <ng-container matColumnDef="marca">
+      <th mat-header-cell class="coluna" *matHeaderCellDef> Marca </th>
+      <td mat-cell class="coluna" *matCellDef="let element"> {{element.marca}} </td>
+    </ng-container>
 
     <!-- Position Column -->
     <ng-container matColumnDef="modelo">
@@ -59,10 +65,12 @@
         <button mat-icon-button *ngIf="element.status == 'Disponível'" [routerLink]="['/carro',element.placa,'aluguel']">
           <mat-icon *ngIf="element.status == 'Disponível'">lock_open</mat-icon>
         </button>
-        <button mat-icon-button (click)="confirmarExcluir(element)">
+        <button mat-icon-button (click)="confirmarExcluir(element)"
+                *ngIf="securityService.hasRoles('ROLE_ADMIN')">
           <mat-icon>delete</mat-icon>
         </button>
-        <button mat-icon-button [routerLink]="['/carro',element.placa]">
+        <button mat-icon-button [routerLink]="['/carro',element.placa]"
+                *ngIf="securityService.hasRoles('ROLE_ADMIN')">
           <mat-icon>edit</mat-icon>
         </button>
       </td>

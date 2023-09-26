@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SecurityService} from "../../../arquitetura/security/security.service";
 import {TipoDto} from "../../../api/models/tipo-dto";
 import {TipoControllerService} from "../../../api/services/tipo-controller.service";
+import {CarroDto} from "../../../api/models/carro-dto";
 
 @Component({
   selector: 'app-form-carro',
@@ -22,6 +23,9 @@ export class FormCarroComponent {
   acao: string = this.ACAO_INCLUIR;
   placa!: string;
   tipos: TipoDto[] = [];
+  marca!: string;
+  modelo!: string;
+  cor!: string;
 
   constructor(
     private router: Router,
@@ -32,7 +36,7 @@ export class FormCarroComponent {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private tipoService: TipoControllerService,
-    private securityService: SecurityService
+    private securityService: SecurityService,
   ) {
     this.carregarDados();
     this.createForm();
@@ -48,18 +52,35 @@ export class FormCarroComponent {
   }
 
   createForm() {
-    if(this.acao == "Editar"){
-      this.carroService.carroControllerObterPorPlaca({placa: this.placa}).subscribe(retorno =>
+    const paramMarca = this.route.snapshot.paramMap.get('marca');
+    const paramCor = this.route.snapshot.paramMap.get('cor');
+    const paramModelo = this.route.snapshot.paramMap.get('modelo');
+    if(paramMarca && paramCor && paramModelo){
+      this.formGroup = this.formBuilder.group({
+        marca: [paramMarca, Validators.required],
+        ano: [null, Validators.required],
+        modelo: [paramModelo, Validators.required],
+        cor: [paramCor, Validators.required],
+        placa: [null, Validators.required],
+        diaria: [null, Validators.required],
+        quilometragem: [null, Validators.required],
+        tipo_id: [null, Validators.required]
+      })
+    } else{
+      if(this.acao == "Editar"){
+        this.carroService.carroControllerObterPorPlaca({placa: this.placa}).subscribe(retorno =>
+          this.formGroup = this.formBuilder.group({
+            marca: [retorno.marca, Validators.required],
+            ano: [retorno.ano, Validators.required],
+            modelo: [retorno.modelo, Validators.required],
+            cor: [retorno.cor, Validators.required],
+            placa: [retorno.placa],
+            diaria: [retorno.diaria],
+            quilometragem: [retorno.quilometragem, Validators.required],
+          }));
+      }else{
         this.formGroup = this.formBuilder.group({
-          ano: [retorno.ano, Validators.required],
-          modelo: [retorno.modelo, Validators.required],
-          cor: [retorno.cor, Validators.required],
-          placa: [retorno.placa],
-          diaria: [retorno.diaria],
-          quilometragem: [retorno.quilometragem, Validators.required],
-        }));
-    }else{
-        this.formGroup = this.formBuilder.group({
+          marca: [null, Validators.required],
           ano: [null, Validators.required],
           modelo: [null, Validators.required],
           cor: [null, Validators.required],
@@ -68,7 +89,9 @@ export class FormCarroComponent {
           quilometragem: [null, Validators.required],
           tipo_id: [null, Validators.required]
         })
+      }
     }
+
   }
 
   onSubmit() {
@@ -138,5 +161,10 @@ export class FormCarroComponent {
     this.tipoService.tipoControllerListAll().subscribe(value => {
       this.tipos = value;
     })
+  }
+
+  adicionarTipo(carroDto: CarroDto){
+    carroDto = this.formGroup.value;
+    this.router.navigateByUrl(`/tipo/novo/${carroDto.marca}/${carroDto.modelo}/${carroDto.cor}`);
   }
 }

@@ -5,6 +5,14 @@
 >
   <div class="formCarro">
     <h1>Formulário para {{acao}}</h1>
+    <div class="div_block">
+    <mat-form-field>
+      <mat-label>Marca:</mat-label>
+      <input matInput formControlName="marca">
+      <mat-error *ngIf="handleError('marca', 'required')">
+        A marca do carro é obrigatório
+      </mat-error>
+    </mat-form-field>
     <mat-form-field>
       <mat-label>Modelo:</mat-label>
       <input matInput formControlName="modelo">
@@ -12,6 +20,8 @@
         O modelo do carro é obrigatório
       </mat-error>
     </mat-form-field>
+    </div>
+    <div class="div_block">
     <mat-form-field>
       <mat-label>Cor:</mat-label>
       <input matInput formControlName="cor">
@@ -24,9 +34,12 @@
       <mat-select formControlName="tipo_id">
         <mat-option>Selecione</mat-option>
         <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.nome}}</mat-option>
+        <mat-option (click)="adicionarTipo(formGroup.value)">Adicionar tipo</mat-option>
       </mat-select>
       <mat-error validationMessage>    </mat-error>
     </mat-form-field>
+    </div>
+    <div class="div_block">
     <mat-form-field>
       <mat-label>Ano:</mat-label>
       <input matInput formControlName="ano" type="number" min="2000" max="2024">
@@ -41,6 +54,8 @@
         A quilometragem do carro é obrigatório
       </mat-error>
     </mat-form-field>
+    </div>
+    <div class="div_block">
     <mat-form-field>
       <mat-label>Diária:</mat-label>
       <input matInput formControlName="diaria" type="number" min="0">
@@ -62,6 +77,7 @@
         A placa do carro é obrigatório
       </mat-error>
     </mat-form-field>
+    </div>
     <button mat-raised-button color="primary" type="submit">Salvar</button>
   </div>
 </form>

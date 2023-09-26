@@ -11,13 +11,14 @@ import {
 import {Router} from "@angular/router";
 import {AluguelDto} from "../../../api/models/aluguel-dto";
 import {AluguelControllerService} from "../../../api/services/aluguel-controller.service";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 @Component({
   selector: 'app-list-carro',
   templateUrl: './list-carro.component.html',
   styleUrls: ['./list-carro.component.scss']
 })
 export class ListCarroComponent implements OnInit {
-  colunasMostrar = ['modelo','tipo', 'cor', 'ano', 'quilometragem','placa','status','diaria', 'acao'];
+  colunasMostrar = ['marca','modelo','tipo', 'cor', 'ano', 'quilometragem','placa','status','diaria', 'acao'];
   carroListaDataSource: MatTableDataSource<CarroDto> = new MatTableDataSource<CarroDto>([]);
 
   constructor(
@@ -26,6 +27,7 @@ export class ListCarroComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router,
+    public securityService: SecurityService
   ) {
   }
 

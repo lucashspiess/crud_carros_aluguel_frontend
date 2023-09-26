@@ -5,6 +5,7 @@ export interface Carro {
   ano?: number;
   cor?: string;
   diaria?: number;
+  marca?: string;
   modelo?: string;
   placa?: string;
   quilometragem?: number;

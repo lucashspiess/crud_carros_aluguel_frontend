@@ -4,6 +4,7 @@ export interface CarroDto {
   ano?: number;
   cor?: string;
   diaria?: number;
+  marca?: string;
   modelo?: string;
   placa?: string;
   quilometragem?: number;

@@ -7,6 +7,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ClienteControllerService} from "../../../api/services/cliente-controller.service";
 import {SecurityService} from "../../../arquitetura/security/security.service";
 import {TipoControllerService} from "../../../api/services/tipo-controller.service";
+import {Tipo} from "../../../api/models/tipo";
+import {TipoDto} from "../../../api/models/tipo-dto";
 
 @Component({
   selector: 'app-form-cliente',
@@ -22,6 +24,10 @@ export class FormTipoComponent {
   id!: number;
   nome!: string;
   descricao!: string;
+  cor!: string;
+  marca!: string;
+  modelo!: string;
+  tipo!: TipoDto;
 
 
   constructor(
@@ -47,6 +53,9 @@ export class FormTipoComponent {
   }
 
   createForm() {
+    const paramMarca = this.route.snapshot.paramMap.get('marca');
+    const paramCor = this.route.snapshot.paramMap.get('cor');
+    const paramModelo = this.route.snapshot.paramMap.get('modelo');
     if (this.acao == "Editar") {
       this.tipoService.tipoControllerObterPorId({id: this.id}).subscribe(retorno =>
         this.formGroup = this.formBuilder.group({
@@ -54,6 +63,11 @@ export class FormTipoComponent {
           descricao: [retorno.descricao, ]
         }));
     } else {
+      if(paramCor && paramMarca && paramModelo){
+        this.marca = paramMarca;
+        this.modelo = paramModelo;
+        this.cor = paramCor;
+      }
       this.formGroup = this.formBuilder.group({
         nome: [null, Validators.required],
         descricao: [null, Validators.required],
@@ -63,13 +77,13 @@ export class FormTipoComponent {
 
   onSubmit() {
     if (this.formGroup.valid) {
-      if (!this.id) {
-        this.realizarInclusao();
-        this.atualizar();
-      } else {
-        this.realizarEdicao();
-        this.atualizar();
-      }
+        if (!this.id) {
+          this.realizarInclusao();
+          this.atualizar();
+        } else {
+          this.realizarEdicao();
+          this.atualizar();
+        }
     }
   }
 
@@ -80,6 +94,7 @@ export class FormTipoComponent {
       }, erro => {
         console.log("Erro:" + erro);
       })
+
   }
 
   public handleError = (controlName: string, errorName: string) => {
@@ -118,6 +133,10 @@ export class FormTipoComponent {
   }
 
   atualizar() {
-    this.router.navigateByUrl('/tipo');
+    if(this.marca){
+      this.router.navigateByUrl(`/carro/novo/${this.marca}/${this.modelo}/${this.cor}`);
+    }else{
+      this.router.navigateByUrl('/tipo');
+    }
   }
 }

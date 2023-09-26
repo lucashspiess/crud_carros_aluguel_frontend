@@ -29,6 +29,10 @@ export const carroRoutes: Routes = [
       {
         path: ":placa",
         component: FormCarroComponent
+      },
+      {
+        path: "novo/:marca/:modelo/:cor",
+        component: FormCarroComponent
       }
     ]
   }

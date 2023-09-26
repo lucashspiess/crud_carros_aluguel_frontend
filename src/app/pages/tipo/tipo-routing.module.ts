@@ -20,6 +20,10 @@ export const tipoRoutes: Routes = [
       {
         path: ":id",
         component: FormTipoComponent
+      },
+      {
+        path: "novo/:marca/:modelo/:cor",
+        component: FormTipoComponent
       }
     ]
   }
