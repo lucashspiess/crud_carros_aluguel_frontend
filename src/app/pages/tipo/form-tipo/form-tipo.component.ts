@@ -41,7 +41,8 @@ export class FormTipoComponent {
 
   ngOnInit(){
     if (!this.securityService.hasRoles(["ROLE_ADMIN"])) {
-      this.router.navigate(['/']);
+      this.showMensagemSimples("Usuário não tem permissão para acessar esta página!");
+      this.router.navigate(['/tipo']);
     }
   }
 
@@ -103,7 +104,7 @@ export class FormTipoComponent {
     this.tipoService.tipoControllerAlterar({id: this.id, body: this.formGroup.value})
       .subscribe(retorno => {
         this.showMensagemSimples("Edição realizada com sucesso!")
-        this.router.navigateByUrl("/cliente");
+        this.router.navigateByUrl("/tipo");
       }, erro => {
       })
   }

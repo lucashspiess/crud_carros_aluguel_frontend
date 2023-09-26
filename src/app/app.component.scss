@@ -1,2 +1,7 @@
 @import "@angular/material/prebuilt-themes/purple-green.css";
-
+.mat-mdc-dialog-surface .mdc-dialog__surface{
+  background-color: rgba(0,0,0,0)!important;
+}
+.mdc-dialog__container{
+  box-shadow: rgba(0,0,0,0)!important;
+}
