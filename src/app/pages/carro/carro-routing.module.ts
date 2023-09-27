@@ -31,7 +31,7 @@ export const carroRoutes: Routes = [
         component: FormCarroComponent
       },
       {
-        path: "novo/:marca/:modelo/:cor",
+        path: "novo/:marca/:modelo/:cor/:tipo",
         component: FormCarroComponent
       }
     ]

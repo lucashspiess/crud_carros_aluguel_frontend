@@ -27,7 +27,7 @@ export class FormTipoComponent {
   cor!: string;
   marca!: string;
   modelo!: string;
-  tipo!: TipoDto;
+  tipo!: number;
 
 
   constructor(
@@ -79,10 +79,8 @@ export class FormTipoComponent {
     if (this.formGroup.valid) {
         if (!this.id) {
           this.realizarInclusao();
-          this.atualizar();
         } else {
           this.realizarEdicao();
-          this.atualizar();
         }
     }
   }
@@ -90,11 +88,12 @@ export class FormTipoComponent {
   private realizarInclusao() {
     this.tipoService.tipoControllerIncluir({body: this.formGroup.value})
       .subscribe(retorno => {
+        this.tipo = retorno.id;
         this.showMensagemSimples("Inclusão realizada com sucesso!");
+        this.atualizar();
       }, erro => {
         console.log("Erro:" + erro);
       })
-
   }
 
   public handleError = (controlName: string, errorName: string) => {
@@ -118,8 +117,8 @@ export class FormTipoComponent {
   private realizarEdicao() {
     this.tipoService.tipoControllerAlterar({id: this.id, body: this.formGroup.value})
       .subscribe(retorno => {
-        this.showMensagemSimples("Edição realizada com sucesso!")
-        this.router.navigateByUrl("/tipo");
+        this.showMensagemSimples("Edição realizada com sucesso!");
+        this.atualizar();
       }, erro => {
       })
   }
@@ -133,9 +132,9 @@ export class FormTipoComponent {
   }
 
   atualizar() {
-    if(this.marca){
-      this.router.navigateByUrl(`/carro/novo/${this.marca}/${this.modelo}/${this.cor}`);
-    }else{
+    if(this.cor){
+      this.router.navigateByUrl(`/carro/novo/${this.marca}/${this.modelo}/${this.cor}/${this.tipo}`);
+    } else{
       this.router.navigateByUrl('/tipo');
     }
   }

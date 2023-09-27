@@ -55,7 +55,9 @@ export class FormCarroComponent {
     const paramMarca = this.route.snapshot.paramMap.get('marca');
     const paramCor = this.route.snapshot.paramMap.get('cor');
     const paramModelo = this.route.snapshot.paramMap.get('modelo');
-    if(paramMarca && paramCor && paramModelo){
+    const paramTipo = this.route.snapshot.paramMap.get('tipo');
+    if(paramMarca && paramCor && paramModelo && paramTipo){
+      const tipo = parseInt(paramTipo);
       this.formGroup = this.formBuilder.group({
         marca: [paramMarca, Validators.required],
         ano: [null, Validators.required],
@@ -64,7 +66,7 @@ export class FormCarroComponent {
         placa: [null, Validators.required],
         diaria: [null, Validators.required],
         quilometragem: [null, Validators.required],
-        tipo_id: [null, Validators.required]
+        tipo_id: [tipo, Validators.required]
       })
     } else{
       if(this.acao == "Editar"){
