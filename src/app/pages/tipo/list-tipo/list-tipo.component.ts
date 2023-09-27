@@ -31,11 +31,10 @@ export class ListTipoComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.buscarDados();
     if (!this.securityService.hasRoles(["ROLE_ADMIN"])) {
       this.showMensagemSimples("Usuário não tem permissão para acessar esta página!");
       this.router.navigate(['/']);
-    } else {
-      this.buscarDados();
     }
   }
 
