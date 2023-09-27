@@ -48,7 +48,7 @@ export class FormTipoComponent {
   ngOnInit(){
     if (!this.securityService.hasRoles(["ROLE_ADMIN"])) {
       this.showMensagemSimples("Usuário não tem permissão para acessar esta página!");
-      this.router.navigate(['/tipo']);
+      this.router.navigate(['/']);
     }
   }
 

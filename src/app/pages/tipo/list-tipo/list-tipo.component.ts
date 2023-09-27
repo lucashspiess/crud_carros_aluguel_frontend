@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import {ClienteDto} from "../../../api/models/cliente-dto";
 import {TipoDto} from "../../../api/models/tipo-dto";
 import {TipoControllerService} from "../../../api/services/tipo-controller.service";
+import {SecurityService} from "../../../arquitetura/security/security.service";
 
 @Component({
   selector: 'app-list-tipo',
@@ -19,17 +20,23 @@ import {TipoControllerService} from "../../../api/services/tipo-controller.servi
 export class ListTipoComponent implements OnInit {
   colunasMostrar = ['nome','descricao', 'acao'];
   tipoListaDataSource: MatTableDataSource<TipoDto> = new MatTableDataSource<ClienteDto>([]);
+  securityService!: SecurityService;
 
   constructor(
     public tipoService: TipoControllerService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private router: Router
+    public router: Router
   ) {
   }
 
-  ngOnInit(): void {
-    this.buscarDados();
+  ngOnInit(){
+    if (!this.securityService.hasRoles(["ROLE_ADMIN"])) {
+      this.showMensagemSimples("Usuário não tem permissão para acessar esta página!");
+      this.router.navigate(['/']);
+    } else {
+      this.buscarDados();
+    }
   }
 
   private buscarDados() {
