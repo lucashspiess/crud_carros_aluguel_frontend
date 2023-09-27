@@ -1,4 +1,4 @@
-<section class="example-container mat-elevation-z8" tabindex="0">
+<section class="example-container mat-elevation-z8" tabindex="0" xmlns="http://www.w3.org/1999/html">
   <button mat-raised-button class="list-button" color="primary" [routerLink]="['/carro','novo']"
           *ngIf="securityService.hasRoles('ROLE_ADMIN')">
     <mat-icon>add</mat-icon>
@@ -56,8 +56,12 @@
     </ng-container>
 
     <!-- Ação Column -->
-    <ng-container matColumnDef="acao">
-      <th mat-header-cell class="coluna" *matHeaderCellDef> Ação </th>
+    <ng-container matColumnDef="acao" >
+
+      <th mat-header-cell class="coluna" *matHeaderCellDef>
+        <p *ngIf="securityService.hasRoles('ROLE_ADMIN')">Ação</p>
+        <p *ngIf="!securityService.hasRoles('ROLE_ADMIN')">Alugar</p>
+      </th>
       <td mat-cell *matCellDef="let element">
         <button mat-icon-button *ngIf="element.status == 'Alugado'" (click)="confirmarDevolver(element)">
           <mat-icon *ngIf="element.status == 'Alugado'">lock</mat-icon>
