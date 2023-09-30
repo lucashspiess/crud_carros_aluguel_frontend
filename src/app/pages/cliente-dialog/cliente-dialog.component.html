@@ -1,0 +1,35 @@
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
+  <div class="formCliente">
+    <h1>Formulário para incluir Cliente</h1>
+    <mat-form-field>
+      <mat-label>Nome:</mat-label>
+      <input matInput formControlName="nome" >
+      <mat-error *ngIf="handleError('nome', 'required')">
+        O ano do nome do cliente é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>E-mail:</mat-label>
+      <input matInput formControlName="email">
+      <mat-error *ngIf="handleError('email', 'required')">
+        A email do cliente é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>CPF:</mat-label>
+      <input matInput formControlName="cpf" readonly>
+      <mat-error *ngIf="handleError('cpf', 'required')">
+        O CPF do cliente é obrigatório
+      </mat-error>
+    </mat-form-field>
+    <div>
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+      <button mat-raised-button (click)="fechar()">Cancelar</button>
+    </div>
+  </div>
+</form>
+

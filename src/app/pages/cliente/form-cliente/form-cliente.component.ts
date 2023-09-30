@@ -39,13 +39,6 @@ export class FormClienteComponent {
     this.prepararEdicao();
   }
 
-  // ngOnInit(){
-  //   if (!this.securityService.hasRoles(["ROLE_ADMIN"])) {
-  //     this.showMensagemSimples("Usuário não tem permissão para acessar esta página!");
-  //     this.router.navigate(['/cliente']);
-  //   }
-  // }
-
   createForm() {
     if (this.acao == "Editar") {
       this.clienteService.clienteControllerObterPorIdCliente({id: this.id}).subscribe(retorno =>

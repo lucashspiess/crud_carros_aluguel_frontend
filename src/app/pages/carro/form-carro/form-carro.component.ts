@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter} from "@angular/material/core";
 import {CarroControllerService} from "../../../api/services/carro-controller.service";
@@ -9,6 +9,9 @@ import {SecurityService} from "../../../arquitetura/security/security.service";
 import {TipoDto} from "../../../api/models/tipo-dto";
 import {TipoControllerService} from "../../../api/services/tipo-controller.service";
 import {CarroDto} from "../../../api/models/carro-dto";
+import {MessageService} from "../../../arquitetura/message/message.service";
+import {FormTipoComponent} from "../../tipo/form-tipo/form-tipo.component";
+import {TipoDialogComponent} from "../../tipo-dialog/tipo-dialog.component";
 
 @Component({
   selector: 'app-form-carro',
@@ -19,6 +22,11 @@ export class FormCarroComponent {
   formGroup!: FormGroup;
   public readonly ACAO_INCLUIR = "Incluir";
   public readonly ACAO_EDITAR = "Editar";
+
+  private carroDto: CarroDto = {
+    placa: "", modelo: "", marca: "",
+    tipo_nome: "", tipo_id: 0, quilometragem: 0,
+    ano: 0, cor: "", status: "", diaria: 0};
 
   acao: string = this.ACAO_INCLUIR;
   placa!: string;
@@ -36,7 +44,7 @@ export class FormCarroComponent {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private tipoService: TipoControllerService,
-    private securityService: SecurityService,
+    private securityService: SecurityService
   ) {
     this.carregarDados();
     this.createForm();
@@ -51,24 +59,12 @@ export class FormCarroComponent {
     }
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TipoDialogComponent);
+  }
+
+
   createForm() {
-    const paramMarca = this.route.snapshot.paramMap.get('marca');
-    const paramCor = this.route.snapshot.paramMap.get('cor');
-    const paramModelo = this.route.snapshot.paramMap.get('modelo');
-    const paramTipo = this.route.snapshot.paramMap.get('tipo');
-    if(paramMarca && paramCor && paramModelo && paramTipo){
-      const tipo = parseInt(paramTipo);
-      this.formGroup = this.formBuilder.group({
-        marca: [paramMarca, Validators.required],
-        ano: [null, Validators.required],
-        modelo: [paramModelo, Validators.required],
-        cor: [paramCor, Validators.required],
-        placa: [null, Validators.required],
-        diaria: [null, Validators.required],
-        quilometragem: [null, Validators.required],
-        tipo_id: [tipo, Validators.required]
-      })
-    } else{
       if(this.acao == "Editar"){
         this.carroService.carroControllerObterPorPlaca({placa: this.placa}).subscribe(retorno =>
           this.formGroup = this.formBuilder.group({
@@ -92,7 +88,6 @@ export class FormCarroComponent {
           tipo_id: [null, Validators.required]
         })
       }
-    }
 
   }
 
@@ -163,10 +158,5 @@ export class FormCarroComponent {
     this.tipoService.tipoControllerListAll().subscribe(value => {
       this.tipos = value;
     })
-  }
-
-  adicionarTipo(carroDto: CarroDto){
-    carroDto = this.formGroup.value;
-    this.router.navigateByUrl(`/tipo/novo/${carroDto.marca}/${carroDto.modelo}/${carroDto.cor}`);
   }
 }

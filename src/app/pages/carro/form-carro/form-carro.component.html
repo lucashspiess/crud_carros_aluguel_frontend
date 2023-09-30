@@ -34,7 +34,7 @@
       <mat-select formControlName="tipo_id">
         <mat-option>Selecione</mat-option>
         <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.nome}}</mat-option>
-        <mat-option (click)="adicionarTipo(formGroup.value)">Adicionar tipo</mat-option>
+        <mat-option (click)="openDialog()">Adicionar tipo</mat-option>
       </mat-select>
       <mat-error validationMessage>    </mat-error>
     </mat-form-field>

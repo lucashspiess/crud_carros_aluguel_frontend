@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, TemplateRef} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter} from "@angular/material/core";
 import {CarroControllerService} from "../../../api/services/carro-controller.service";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AluguelControllerService} from "../../../api/services/aluguel-controller.service";
@@ -12,6 +12,11 @@ import {
 } from "../../../core/confirmation-dialog/confirmation-dialog.component";
 import {AluguelDto} from "../../../api/models/aluguel-dto";
 import {ClienteControllerService} from "../../../api/services/cliente-controller.service";
+import {TipoDialogComponent} from "../../tipo-dialog/tipo-dialog.component";
+import {ClienteDialogComponent} from "../../cliente-dialog/cliente-dialog.component";
+import {ClienteDto} from "../../../api/models/cliente-dto";
+import {MessageService} from "../../../arquitetura/message/message.service";
+import {TipoDto} from "../../../api/models/tipo-dto";
 
 @Component({
   selector: 'app-form-cliente',
@@ -34,7 +39,8 @@ export class FormAluguelComponent {
     public carroService: CarroControllerService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    public clienteService: ClienteControllerService
+    public clienteService: ClienteControllerService,
+    private messageService: MessageService
   ) {
     this.createForm();
     this._adapter.setLocale("pt-br");
@@ -114,9 +120,15 @@ export class FormAluguelComponent {
     })
   }
 
+  openDialog(element: ClienteDto): void {
+    console.log(element);
+    const dialogRef = this.dialog.open(ClienteDialogComponent, {data:{cpf: element.cpf}});
+  }
+
   verificarCliente(aluguelDto: AluguelDto) {
     this.clienteService.clienteControllerObterPorCpfCliente({cpf: aluguelDto.cpf_cliente || 0}).subscribe(retorno =>{
         this.confirmarAluguel(aluguelDto);
+        this.cpf = aluguelDto.cpf_cliente || 0;
       }
       , error => {
         const dialogRef = this.dialog.open(ConfirmationDialog, {
@@ -131,11 +143,7 @@ export class FormAluguelComponent {
         })
         dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
           if (confirmed?.resultado) {
-            const paramInicio = new Date(aluguelDto.data_inicio || "");
-            const paramFim = new Date(aluguelDto.data_fim || "");
-            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-              this.router.navigateByUrl(`/cliente/novo/${aluguelDto.cpf_cliente}/${paramInicio.toISOString()}/${paramFim.toISOString()}/${aluguelDto.carro_placa}`);
-            });
+            this.openDialog({cpf: aluguelDto.cpf_cliente, email: "", nome: ""});
           }
         });
       })

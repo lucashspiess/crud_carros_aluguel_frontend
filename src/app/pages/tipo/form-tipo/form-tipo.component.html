@@ -5,7 +5,6 @@
 >
   <div class="formCliente">
     <h1>Formulário para {{acao}}</h1>
-    <div class="div_block">
     <mat-form-field>
       <mat-label>Nome:</mat-label>
       <input matInput formControlName="nome" >
@@ -15,12 +14,12 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Descrição:</mat-label>
-      <input matInput formControlName="descricao">
+      <textarea matInput formControlName="descricao">
       <mat-error *ngIf="handleError('descricao', 'required')">
         A descrição do tipo é obrigatório
       </mat-error>
+      </textarea>
     </mat-form-field>
-    </div>
     <button mat-raised-button color="primary" type="submit">Salvar</button>
   </div>
 </form>

@@ -26,7 +26,7 @@ defineComponents(IgcRatingComponent)
   declarations: [
     ListTipoComponent,
     HomeTipoComponent,
-    FormTipoComponent,
+    FormTipoComponent
   ],
   imports: [
     CommonModule,

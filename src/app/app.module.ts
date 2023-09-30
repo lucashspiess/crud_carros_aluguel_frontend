@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import {CarroModule} from "./pages/carro/carro.module";
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import {MatDialogModule} from "@angular/material/dialog";
 import { ConfirmationDialog } from './core/confirmation-dialog/confirmation-dialog.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
@@ -29,13 +29,19 @@ import {SecurityInterceptor} from "./arquitetura/security/security.interceptor";
 import {LoaderModule} from "./arquitetura/loader/loader.module";
 import {TipoModule} from "./pages/tipo/tipo.module";
 import {AluguelModule} from "./pages/aluguel/aluguel.module";
+import { TipoDialogComponent } from './pages/tipo-dialog/tipo-dialog.component';
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {ClienteDialogComponent} from "./pages/cliente-dialog/cliente-dialog.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ConfirmationDialog,
-    LoaderDialogComponent
+    LoaderDialogComponent,
+    TipoDialogComponent,
+    ClienteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +71,9 @@ import {AluguelModule} from "./pages/aluguel/aluguel.module";
       nameStorage: 'portalSSOSecurityStorage',
       loginRouter: '/acesso/login'
     }),
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},

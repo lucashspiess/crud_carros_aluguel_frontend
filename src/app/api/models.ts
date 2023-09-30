@@ -9,5 +9,6 @@ export { UsuarioSenhaDto } from './models/usuario-senha-dto';
 export { AluguelDto } from './models/aluguel-dto';
 export { Cliente } from './models/cliente';
 export { Carro } from './models/carro';
+export { IEntidadeObject } from './models/i-entidade-object';
 export { Tipo } from './models/tipo';
 export { AuthDto } from './models/auth-dto';

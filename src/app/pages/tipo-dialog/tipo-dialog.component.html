@@ -1,0 +1,30 @@
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="form"
+>
+  <div class="formCliente">
+    <h1>Formulário para incluir Tipo</h1>
+    <div fxLayout="row" fxLayoutAlign.gt-xs="center end" fxLayout.lt-sm="column" fxLayoutGap="0.7%">
+      <mat-form-field>
+        <mat-label>Nome:</mat-label>
+        <input matInput formControlName="nome" >
+        <mat-error *ngIf="handleError('nome', 'required')">
+          O ano do nome do tipo é obrigatório
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Descrição:</mat-label>
+        <textarea matInput formControlName="descricao">
+          <mat-error *ngIf="handleError('descricao', 'required')">
+            A descrição do tipo é obrigatório
+          </mat-error>
+        </textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" type="submit" (click)="cancelar()">Salvar</button>
+      <button mat-raised-button (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+</form>

@@ -1,17 +1,18 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter} from "@angular/material/core";
 import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ClienteControllerService} from "../../../api/services/cliente-controller.service";
 import {SecurityService} from "../../../arquitetura/security/security.service";
 import {TipoControllerService} from "../../../api/services/tipo-controller.service";
-import {Tipo} from "../../../api/models/tipo";
+import {CarroDto} from "../../../api/models/carro-dto";
 import {TipoDto} from "../../../api/models/tipo-dto";
+import {MessageService} from "../../../arquitetura/message/message.service";
+import {CarroControllerService} from "../../../api/services/carro-controller.service";
 
 @Component({
-  selector: 'app-form-cliente',
+  selector: 'app-form-tipo',
   templateUrl: './form-tipo.component.html',
   styleUrls: ['./form-tipo.component.scss']
 })
