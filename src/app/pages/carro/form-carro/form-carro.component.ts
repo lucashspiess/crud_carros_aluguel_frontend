@@ -60,7 +60,9 @@ export class FormCarroComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(TipoDialogComponent);
+    const dialogRef = this.dialog.open(TipoDialogComponent).afterClosed().subscribe(
+      result => this.carregarDados()
+    );
   }
 
 
