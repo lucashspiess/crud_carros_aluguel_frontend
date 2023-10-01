@@ -86,7 +86,7 @@
       type="file" (change)="onFileChanged($event)"
       #fileInput
     >
-    <button mat-raised-button class="btn-imagem" color="primary" type="button" (click)="fileInput.click()">Selecionar imagem</button>
+    <button mat-raised-button class="btn-imagem" color="primary" type="button" (click)="fileInput.click()"><mat-icon> insert_photo</mat-icon>Selecionar imagem</button>
     <div>
       <button mat-raised-button type="button" class="btn-voltar" (click)="router.navigateByUrl('/carro')">Voltar</button>
       <button mat-raised-button color="primary" type="submit">Salvar</button>
