@@ -3,9 +3,11 @@
   (ngSubmit)="onSubmit()"
   class="form"
 >
-  <div class="formCarro">
+  <div fxLayout="row">
+  <div class="formCarro" fxLayout="column wrap">
     <h1>Formulário para {{acao}}</h1>
-    <div class="div_block">
+    <div class="dados-form" fxLayout="row wrap" fxLayoutAlign="start space-evenly">
+    <div class="div-carro" fxLayoutAlign="start center">
     <mat-form-field>
       <mat-label>Marca:</mat-label>
       <input matInput formControlName="marca">
@@ -80,17 +82,25 @@
       </mat-error>
     </mat-form-field>
     </div>
+    <div fxLayout="column" class="botoes-form">
     <input formControlName="imagem_id" style="display: none">
     <input
       style="display: none"
       type="file" (change)="onFileChanged($event)"
       #fileInput
     >
-    <button mat-raised-button class="btn-imagem" color="primary" type="button" (click)="fileInput.click()"><mat-icon> insert_photo</mat-icon>Selecionar imagem</button>
+      <button *ngIf="!imagem_path" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="fileInput.click()"><mat-icon> insert_photo</mat-icon>Selecionar imagem</button>
+      <button *ngIf="imagem_path" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="fileInput.click()"><mat-icon> insert_photo</mat-icon>Alterar imagem</button>
+      <div>
+      </div>
     <div>
       <button mat-raised-button type="button" class="btn-voltar" (click)="router.navigateByUrl('/carro')">Voltar</button>
       <button mat-raised-button color="primary" type="submit">Salvar</button>
     </div>
+    </div>
+    </div>
+  </div>
+  <img *ngIf="imagem_path" class="imagem-selecionada" src="{{imagem_path}}" height="300px">
   </div>
 </form>
 

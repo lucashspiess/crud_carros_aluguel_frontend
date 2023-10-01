@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 70%;
+  width: 50%;
   font-family: Arial;
+  margin: 0px;
 }
 
 mat-form-field{
@@ -11,7 +12,11 @@ mat-form-field{
 }
 
 .div_block{
-  width: 1500px;
+  width: 100%;
+}
+
+.div-carro{
+  width: 100%;
 }
 
 h1{
@@ -28,4 +33,20 @@ mat-form-field{
 
 .btn-imagem{
   margin-bottom: 40px;
+  width: 212px;
+}
+
+.imagem-selecionada{
+  margin-top:80px;
+  margin-bottom: 10px;
+  border: 2px solid #949494;
+  border-radius: 2px;
+}
+
+.dados-form{
+  width: 100%;
+}
+
+.botoes-form{
+  width:100%;
 }

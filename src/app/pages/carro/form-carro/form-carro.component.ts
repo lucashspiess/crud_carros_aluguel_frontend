@@ -24,6 +24,7 @@ export class FormCarroComponent {
   public readonly ACAO_EDITAR = "Editar";
 
   imagem_id!: number;
+  imagem_path!: string | undefined;
 
   acao: string = this.ACAO_INCLUIR;
   placa!: string;
@@ -101,7 +102,7 @@ export class FormCarroComponent {
         this.atualizar();
       }
     } else{
-      console.log("inválido: " + JSON.stringify(this.formGroup.value));
+      this.showMensagemSimples("Verifique se todos os campos estão preenchidos!");
     }
   }
 
@@ -128,6 +129,7 @@ export class FormCarroComponent {
           console.log(retorno)
           this.acao = this.ACAO_EDITAR;
           this.placa = retorno.placa || "";
+          this.imagem_path = retorno.imagem_path;
           this.formGroup.patchValue(retorno);
         }
       )
@@ -167,9 +169,20 @@ export class FormCarroComponent {
   onFileChanged(event: Event) {
     if(event){
       // @ts-ignore
-      this.selectedFile = event.target.files[0];
+      this.selectedFile = <File>event.target.files[0];
+      // @ts-ignore
+      if (event.target.files && event.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (event: any) => {
+          this.imagem_path = event.target.result;
+        }
+        // @ts-ignore
+        reader.readAsDataURL(event.target.files[0]);
+      }
       this.imagemService.imagemControllerUploadImagem({body: {imagemASalvar: this.selectedFile}}).subscribe(
-        retorno => this.formGroup.patchValue({imagem_id: retorno})
+        retorno => {
+          this.formGroup.patchValue({imagem_id: retorno});
+        }
       );
     }
   }
