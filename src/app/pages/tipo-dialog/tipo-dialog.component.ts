@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
 import {TipoControllerService} from "../../api/services/tipo-controller.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {SecurityService} from "../../arquitetura/security/security.service";
 
 @Component({
   selector: 'app-tipo-dialog',

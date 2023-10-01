@@ -34,6 +34,8 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ClienteDialogComponent} from "./pages/cliente-dialog/cliente-dialog.component";
 import {MatCard} from "@angular/material/card";
+import {ImagemDialogComponent} from "./pages/carro/imagem-dialog/imagem-dialog.component";
+import {FlexModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import {MatCard} from "@angular/material/card";
     ConfirmationDialog,
     LoaderDialogComponent,
     TipoDialogComponent,
-    ClienteDialogComponent
+    ClienteDialogComponent,
+    ImagemDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,7 @@ import {MatCard} from "@angular/material/card";
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    FlexModule,
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},

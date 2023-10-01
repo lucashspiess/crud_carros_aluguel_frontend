@@ -12,6 +12,8 @@ import {Router} from "@angular/router";
 import {AluguelDto} from "../../../api/models/aluguel-dto";
 import {AluguelControllerService} from "../../../api/services/aluguel-controller.service";
 import {SecurityService} from "../../../arquitetura/security/security.service";
+import {MessageService} from "../../../arquitetura/message/message.service";
+import {ImagemDialogComponent} from "../imagem-dialog/imagem-dialog.component";
 @Component({
   selector: 'app-list-carro',
   templateUrl: './list-carro.component.html',
@@ -26,7 +28,8 @@ export class ListCarroComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router,
-    public securityService: SecurityService
+    public securityService: SecurityService,
+    private messageService: MessageService
   ) {
   }
 
@@ -74,6 +77,14 @@ export class ListCarroComponent implements OnInit {
       if (confirmed?.resultado) {
         console.log(confirmed.dado);
         this.remover(confirmed.dado);
+      }
+    });
+  }
+
+  abrirImagem(caminho: string | undefined){
+    this.dialog.open(ImagemDialogComponent, {
+      data:{
+        caminho: caminho
       }
     });
   }

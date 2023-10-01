@@ -12,10 +12,10 @@
         <mat-card-title> {{carro.modelo}}</mat-card-title>
         <mat-card-subtitle>{{carro.marca}} - {{carro.ano}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="{{carro.imagem_path}}" alt="Photo of  {{carro.marca}} {{carro.modelo}}" (click)="showMensagemSimples('teste')">
+      <img class="img-carro" mat-card-image src="{{carro.imagem_path}}" alt="Photo of  {{carro.marca}} {{carro.modelo}}" (click)="abrirImagem(carro.imagem_path)">
         <mat-card-content>
           <p>
-            KM: {{carro.quilometragem}} Km
+            Km: {{carro.quilometragem}} Km
           </p>
           <p>
             Status: {{carro.status}}
