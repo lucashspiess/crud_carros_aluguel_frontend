@@ -21,6 +21,7 @@ import { IgcFormsModule } from 'igniteui-angular';
 import { CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormAluguelComponent} from "./form-aluguel/form-aluguel.component";
+import {FlexModule} from "@angular/flex-layout";
 
 defineComponents(IgcRatingComponent)
 @NgModule({
@@ -30,23 +31,24 @@ defineComponents(IgcRatingComponent)
     FormCarroComponent,
     FormAluguelComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(carroRoutes),
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatDialogModule,
-    IgcFormsModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(carroRoutes),
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatDialogModule,
+        IgcFormsModule,
+        FormsModule,
+        FlexModule
+    ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CarroModule { }

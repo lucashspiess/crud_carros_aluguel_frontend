@@ -32,7 +32,7 @@ export class FormTipoComponent {
 
 
   constructor(
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,

@@ -33,6 +33,7 @@ import { TipoDialogComponent } from './pages/tipo-dialog/tipo-dialog.component';
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ClienteDialogComponent} from "./pages/cliente-dialog/cliente-dialog.component";
+import {MatCard} from "@angular/material/card";
 
 @NgModule({
   declarations: [

@@ -4,3 +4,36 @@
   align-content: center;
   text-align: center;
 }
+
+.example-card {
+  max-width: 200px;
+  margin-right: 20px;
+}
+
+p{
+  font-family: Arial;
+}
+div{
+  display: flex;
+}
+
+mat-card{
+  margin-top: 20px;
+  margin-left: 13px;
+  width: 200px;
+  height: 390px;
+  justify-content: space-evenly;
+}
+
+mat-card-actions{
+  justify-content: space-evenly;
+}
+
+.btn-carro{
+  margin-left:13px;
+  margin-top:10px;
+}
+
+
+
+

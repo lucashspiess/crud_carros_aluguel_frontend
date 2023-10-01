@@ -10,6 +10,7 @@ import { ClienteControllerService } from './services/cliente-controller.service'
 import { CarroControllerService } from './services/carro-controller.service';
 import { AuthApiService } from './services/auth-api.service';
 import { AluguelControllerService } from './services/aluguel-controller.service';
+import { ImagemControllerService } from './services/imagem-controller.service';
 
 /**
  * Module that provides all services and configuration.
@@ -25,6 +26,7 @@ import { AluguelControllerService } from './services/aluguel-controller.service'
     CarroControllerService,
     AuthApiService,
     AluguelControllerService,
+    ImagemControllerService,
     ApiConfiguration
   ],
 })

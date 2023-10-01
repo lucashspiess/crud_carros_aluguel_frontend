@@ -28,7 +28,10 @@
       <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Alugar</button>
+    <div>
+      <button mat-raised-button type="button" class="btn-voltar" (click)="router.navigateByUrl('/carro')">Voltar</button>
+      <button mat-raised-button color="primary" type="submit">Alugar</button>
+    </div>
   </div>
 </form>
 

@@ -42,7 +42,6 @@ export class AppComponent {
         };
         this.securityService.init(user);
       }, error => {
-        console.log(error);
         this.messageService.addMsgInf(error);
       });
     });

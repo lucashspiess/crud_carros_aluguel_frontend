@@ -26,7 +26,6 @@ export class AppInterceptor implements HttpInterceptor {
      */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError((response: HttpErrorResponse): Observable<HttpEvent<Message>> => {
-            console.log('intercept', response);
             const messageTO = Object.assign(new Message(), response.error);
 
             if (messageTO.status === 401 || messageTO.status === 403) {

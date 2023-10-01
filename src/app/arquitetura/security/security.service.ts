@@ -42,7 +42,6 @@ export class SecurityService {
    * @param user
    */
   public init(user?: User): void {
-    console.log('security.service', user);
     this.credential.init(user);
 
     if (user) {

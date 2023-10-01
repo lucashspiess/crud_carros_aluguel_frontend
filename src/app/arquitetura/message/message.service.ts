@@ -272,8 +272,6 @@ export class MessageService {
    * @param params
    */
   public getDescription(msg: string, params?: any): string {
-    console.log("msg:", msg);
-    console.log("params", params);
     let description =  msg;
     return description;
   }

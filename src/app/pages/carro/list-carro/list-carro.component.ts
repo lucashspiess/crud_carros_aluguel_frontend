@@ -18,8 +18,7 @@ import {SecurityService} from "../../../arquitetura/security/security.service";
   styleUrls: ['./list-carro.component.scss']
 })
 export class ListCarroComponent implements OnInit {
-  colunasMostrar = ['marca','modelo','tipo', 'cor', 'ano', 'quilometragem','placa','status','diaria', 'acao'];
-  carroListaDataSource: MatTableDataSource<CarroDto> = new MatTableDataSource<CarroDto>([]);
+  carros: CarroDto[] = [];
 
   constructor(
     public carroService: CarroControllerService,
@@ -37,7 +36,7 @@ export class ListCarroComponent implements OnInit {
 
   private buscarDados() {
     this.carroService.carroControllerListAllCarro().subscribe(data => {
-      this.carroListaDataSource.data = data;
+      this.carros = data;
     })
   }
 
@@ -49,6 +48,7 @@ export class ListCarroComponent implements OnInit {
           this.atualizar();
         }, error => {
           if (error.status === 500) {
+            console.log(carroDto);
             this.showMensagemSimples("Não é possível excluir um carro alugado")
           } else {
             this.showMensagemSimples("Erro ao excluir");
@@ -72,6 +72,7 @@ export class ListCarroComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
       if (confirmed?.resultado) {
+        console.log(confirmed.dado);
         this.remover(confirmed.dado);
       }
     });
@@ -117,4 +118,6 @@ export class ListCarroComponent implements OnInit {
       this.router.navigateByUrl('/carro');
     });
   }
+
+  protected readonly toString = toString;
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter} from "@angular/material/core";
 import {CarroControllerService} from "../../../api/services/carro-controller.service";
@@ -8,10 +8,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SecurityService} from "../../../arquitetura/security/security.service";
 import {TipoDto} from "../../../api/models/tipo-dto";
 import {TipoControllerService} from "../../../api/services/tipo-controller.service";
-import {CarroDto} from "../../../api/models/carro-dto";
-import {MessageService} from "../../../arquitetura/message/message.service";
-import {FormTipoComponent} from "../../tipo/form-tipo/form-tipo.component";
 import {TipoDialogComponent} from "../../tipo-dialog/tipo-dialog.component";
+import {ImagemControllerService} from "../../../api/services/imagem-controller.service";
+import {Imagem} from "../../../api/models/imagem";
 
 @Component({
   selector: 'app-form-carro',
@@ -20,23 +19,18 @@ import {TipoDialogComponent} from "../../tipo-dialog/tipo-dialog.component";
 })
 export class FormCarroComponent {
   formGroup!: FormGroup;
+  selectedFile!: File
   public readonly ACAO_INCLUIR = "Incluir";
   public readonly ACAO_EDITAR = "Editar";
 
-  private carroDto: CarroDto = {
-    placa: "", modelo: "", marca: "",
-    tipo_nome: "", tipo_id: 0, quilometragem: 0,
-    ano: 0, cor: "", status: "", diaria: 0};
+  imagem_id!: number;
 
   acao: string = this.ACAO_INCLUIR;
   placa!: string;
   tipos: TipoDto[] = [];
-  marca!: string;
-  modelo!: string;
-  cor!: string;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,
@@ -44,7 +38,8 @@ export class FormCarroComponent {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private tipoService: TipoControllerService,
-    private securityService: SecurityService
+    private securityService: SecurityService,
+    private imagemService: ImagemControllerService
   ) {
     this.carregarDados();
     this.createForm();
@@ -60,8 +55,8 @@ export class FormCarroComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(TipoDialogComponent).afterClosed().subscribe(
-      result => this.carregarDados()
+    this.dialog.open(TipoDialogComponent).afterClosed().subscribe(
+      () => this.carregarDados()
     );
   }
 
@@ -77,6 +72,8 @@ export class FormCarroComponent {
             placa: [retorno.placa],
             diaria: [retorno.diaria],
             quilometragem: [retorno.quilometragem, Validators.required],
+            tipo_id: [retorno.tipo_id, Validators.required],
+            imagem_id: [retorno.imagem_id, Validators.required]
           }));
       }else{
         this.formGroup = this.formBuilder.group({
@@ -87,7 +84,8 @@ export class FormCarroComponent {
           placa: [null, Validators.required],
           diaria: [null, Validators.required],
           quilometragem: [null, Validators.required],
-          tipo_id: [null, Validators.required]
+          tipo_id: [null, Validators.required],
+          imagem_id: [null, Validators.required]
         })
       }
 
@@ -102,15 +100,19 @@ export class FormCarroComponent {
         this.realizarEdicao();
         this.atualizar();
       }
+    } else{
+      console.log("inválido: " + JSON.stringify(this.formGroup.value));
     }
   }
 
   private realizarInclusao() {
+    console.log(this.formGroup.value)
     this.carroService.carroControllerIncluirCarro({body: this.formGroup.value})
       .subscribe(retorno => {
+        console.log("inlcuido: " + retorno);
         this.showMensagemSimples("Inclusão realizada com sucesso!");
       }, erro => {
-        console.log("Erro:" + erro);
+        console.log("Erro:" + JSON.stringify(erro));
       })
   }
 
@@ -121,9 +123,9 @@ export class FormCarroComponent {
   private prepararEdicao() {
     const paramPlaca = this.route.snapshot.paramMap.get('placa');
     if (paramPlaca) {
-      const placa = paramPlaca;
-      this.carroService.carroControllerObterPorPlaca({placa: placa}).subscribe(
+      this.carroService.carroControllerObterPorPlaca({placa: paramPlaca}).subscribe(
         retorno => {
+          console.log(retorno)
           this.acao = this.ACAO_EDITAR;
           this.placa = retorno.placa || "";
           this.formGroup.patchValue(retorno);
@@ -135,9 +137,9 @@ export class FormCarroComponent {
   private realizarEdicao() {
     this.carroService.carroControllerAlterarCarro({placa: this.placa, body: this.formGroup.value})
       .subscribe(retorno => {
+        console.log("editado: " + JSON.stringify(retorno));
         this.showMensagemSimples("Edição realizada com sucesso!")
         this.router.navigateByUrl("/carro");
-      }, erro => {
       })
   }
 
@@ -160,5 +162,15 @@ export class FormCarroComponent {
     this.tipoService.tipoControllerListAll().subscribe(value => {
       this.tipos = value;
     })
+  }
+
+  onFileChanged(event: Event) {
+    if(event){
+      // @ts-ignore
+      this.selectedFile = event.target.files[0];
+      this.imagemService.imagemControllerUploadImagem({body: {imagemASalvar: this.selectedFile}}).subscribe(
+        retorno => this.formGroup.patchValue({imagem_id: retorno})
+      );
+    }
   }
 }

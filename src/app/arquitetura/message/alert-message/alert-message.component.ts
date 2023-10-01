@@ -53,7 +53,6 @@ export class AlertMessageComponent {
     private messageService: MessageService, public domSanitizer: DomSanitizer) {
     this.items = [];
     this.messageService.getMsgEmitter().subscribe(item => {
-      console.log("msgEmitter:", item);
       this.addMsgItem(item)
     });
   }

@@ -33,7 +33,11 @@
         O CPF do cliente é obrigatório
       </mat-error>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Salvar</button>
+    <div>
+      <button mat-raised-button type="button" class="btn-voltar" (click)="router.navigateByUrl('/cliente')">Voltar</button>
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </div>
+
   </div>
 </form>
 

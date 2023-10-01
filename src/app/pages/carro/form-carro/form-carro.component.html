@@ -29,15 +29,15 @@
         A cor do carro é obrigatório
       </mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tipo:</mat-label>
-      <mat-select formControlName="tipo_id">
-        <mat-option>Selecione</mat-option>
-        <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.nome}}</mat-option>
-        <mat-option (click)="openDialog()">Adicionar tipo</mat-option>
-      </mat-select>
-      <mat-error validationMessage>    </mat-error>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tipo:</mat-label>
+        <mat-select formControlName="tipo_id">
+          <mat-option>Selecione</mat-option>
+          <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.nome}}</mat-option>
+          <mat-option (click)="openDialog()">Adicionar tipo</mat-option>
+        </mat-select>
+        <mat-error validationMessage>    </mat-error>
+      </mat-form-field>
     </div>
     <div class="div_block">
     <mat-form-field>
@@ -49,7 +49,8 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Quilometragem:</mat-label>
-      <input matInput formControlName="quilometragem" type="number" min="0">
+      <input matInput formControlName="quilometragem" type="number" min="0" placeholder="0">
+      <span matTextSuffix>Km</span>
       <mat-error *ngIf="handleError('quilometragem', 'required')">
         A quilometragem do carro é obrigatório
       </mat-error>
@@ -58,7 +59,8 @@
     <div class="div_block">
     <mat-form-field>
       <mat-label>Diária:</mat-label>
-      <input matInput formControlName="diaria" type="number" min="0">
+        <input matInput formControlName="diaria" type="number" class="align-right" placeholder="0">
+        <span matTextPrefix>R$&nbsp;</span>
       <mat-error *ngIf="handleError('diaria', 'required')">
         A diária do carro é obrigatório
       </mat-error>
@@ -78,7 +80,17 @@
       </mat-error>
     </mat-form-field>
     </div>
-    <button mat-raised-button color="primary" type="submit">Salvar</button>
+    <input formControlName="imagem_id" style="display: none">
+    <input
+      style="display: none"
+      type="file" (change)="onFileChanged($event)"
+      #fileInput
+    >
+    <button mat-raised-button class="btn-imagem" color="primary" type="button" (click)="fileInput.click()">Selecionar imagem</button>
+    <div>
+      <button mat-raised-button type="button" class="btn-voltar" (click)="router.navigateByUrl('/carro')">Voltar</button>
+      <button mat-raised-button color="primary" type="submit">Salvar</button>
+    </div>
   </div>
 </form>
 

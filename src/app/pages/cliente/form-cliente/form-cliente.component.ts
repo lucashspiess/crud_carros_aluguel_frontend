@@ -25,7 +25,7 @@ export class FormClienteComponent {
   data_fim!: string;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,

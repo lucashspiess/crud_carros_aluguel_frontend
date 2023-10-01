@@ -77,7 +77,7 @@ export class HomeComponent {
     const dialogRef = this.dialog.open(ConfirmationDialog, {
       data: {
         titulo: 'Sobre',
-        mensagem: 'Sistema para controle de carros para aluguel - versão: 2.0',
+        mensagem: 'Sistema para controle de carros para aluguel - versão: 3.0',
         textoBotoes: {
           ok: 'Ok'
         },

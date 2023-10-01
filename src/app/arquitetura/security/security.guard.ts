@@ -36,7 +36,6 @@ export class SecurityGuard implements CanActivate {
      */
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         let valid = false;
-        console.log('canActive');
         if (this.securityService.isValid()) {
             const roles = next.data['security'] ? next.data['security'].roles : [];
 

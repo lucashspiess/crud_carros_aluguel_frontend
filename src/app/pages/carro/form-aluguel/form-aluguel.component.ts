@@ -31,7 +31,7 @@ export class FormAluguelComponent {
   data_fim: any = new Date();
 
   constructor(
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private _adapter: DateAdapter<any>,
