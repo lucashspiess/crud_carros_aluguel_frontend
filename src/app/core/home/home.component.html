@@ -16,42 +16,42 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
 
-    <button mat-button class="menu-button" routerLink="/">
+    <button class="home-icon" mat-button class="menu-button" routerLink="/">
       <mat-icon>home</mat-icon>
-      <span>Home</span>
+      <span class="home-icon" >Home</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/carro">
+    <button class="home-icon" mat-button class="menu-button" routerLink="/carro">
       <mat-icon>directions_car</mat-icon>
-      <span>Carros</span>
+      <span class="home-icon" >Carros</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/cliente">
+    <button class="home-icon" mat-button class="menu-button" routerLink="/cliente">
       <mat-icon>person</mat-icon>
-      <span>Clientes</span>
+      <span class="home-icon" >Clientes</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/aluguel">
+    <button class="home-icon" mat-button class="menu-button" routerLink="/aluguel">
       <mat-icon>calendar_today</mat-icon>
-      <span>Aluguéis</span>
+      <span class="home-icon">Aluguéis</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/tipo"
+    <button class="home-icon" mat-button class="menu-button" routerLink="/tipo"
             *ngIf="securityService.hasRoles('ROLE_ADMIN')">
       <mat-icon>commute</mat-icon>
-      <span>Tipos</span>
+      <span class="home-icon" >Tipos</span>
     </button>
-    <button mat-button class="menu-button" (click)="mostrarSobre()">
+    <button class="home-icon" mat-button class="menu-button" (click)="mostrarSobre()">
       <mat-icon>info</mat-icon>
-      <span>Sobre</span>
+      <span class="home-icon" >Sobre</span>
     </button>
 
-    <mat-divider></mat-divider>
+    <mat-divider class="home-icon" ></mat-divider>
 
-    <button mat-button class="menu-button" (click)="mostrarAjuda()">
-      <mat-icon>help</mat-icon>
-      <span>Ajuda</span>
+    <button  mat-button class="menu-button" (click)="mostrarAjuda()">
+      <mat-icon class="home-icon" >help</mat-icon>
+      <span class="home-icon" >Ajuda</span>
     </button>
 
-    <button mat-button class="menu-button" (click)="sair()">
+    <button class="home-icon" mat-button class="menu-button" (click)="sair()">
       <mat-icon>logout</mat-icon>
-      <span>Sair</span>
+      <span class="home-icon" >Sair</span>
     </button>
 
   </mat-sidenav>

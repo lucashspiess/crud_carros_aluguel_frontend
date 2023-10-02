@@ -47,3 +47,15 @@ h1{
 .btn-voltar{
   margin-right: 17px;
 }
+
+html ::-webkit-scrollbar {
+  width: 10px;
+}
+html ::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: #7b1fa2;
+}
+html ::-webkit-scrollbar-track {
+  border-radius: 50px;
+  background: #555555;
+}
