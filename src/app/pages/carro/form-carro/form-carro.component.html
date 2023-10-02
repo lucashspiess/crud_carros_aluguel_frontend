@@ -87,10 +87,11 @@
     <input
       style="display: none"
       type="file" (change)="onFileChanged($event)"
-      #fileInput
+      accept="image/*"
+      #imageInput
     >
-      <button *ngIf="!imagem_path" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="fileInput.click()"><mat-icon> insert_photo</mat-icon>Selecionar imagem</button>
-      <button *ngIf="imagem_path" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="fileInput.click()"><mat-icon> insert_photo</mat-icon>Alterar imagem</button>
+      <button *ngIf="!imagem_path" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="imageInput.click()"><mat-icon> insert_photo</mat-icon>Selecionar imagem</button>
+      <button *ngIf="imagem_path" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="imageInput.click()"><mat-icon> insert_photo</mat-icon>Alterar imagem</button>
       <div>
       </div>
     <div>
