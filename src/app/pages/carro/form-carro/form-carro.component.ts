@@ -11,6 +11,7 @@ import {TipoControllerService} from "../../../api/services/tipo-controller.servi
 import {TipoDialogComponent} from "../../tipo-dialog/tipo-dialog.component";
 import {ImagemControllerService} from "../../../api/services/imagem-controller.service";
 import {Imagem} from "../../../api/models/imagem";
+import {ImagemDialogComponent} from "../imagem-dialog/imagem-dialog.component";
 
 @Component({
   selector: 'app-form-carro',
@@ -164,6 +165,14 @@ export class FormCarroComponent {
     this.tipoService.tipoControllerListAll().subscribe(value => {
       this.tipos = value;
     })
+  }
+
+  abrirImagem(caminho: string | undefined){
+    this.dialog.open(ImagemDialogComponent, {
+      data:{
+        caminho: caminho
+      }
+    });
   }
 
   onFileChanged(event: Event) {

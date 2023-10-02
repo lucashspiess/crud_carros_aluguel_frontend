@@ -101,7 +101,7 @@
     </div>
     </div>
   </div>
-  <img *ngIf="imagem_path" class="imagem-selecionada" src="{{imagem_path}}" height="300px">
+  <img *ngIf="imagem_path" title="Expandir imagem" class="imagem-selecionada" src="{{imagem_path}}" height="300px" (click)="abrirImagem(imagem_path)">
   </div>
 </form>
 

@@ -12,7 +12,7 @@
         <mat-card-title> {{carro.modelo}}</mat-card-title>
         <mat-card-subtitle>{{carro.marca}} - {{carro.ano}}</mat-card-subtitle>
       </mat-card-header>
-      <img class="img-carro" mat-card-image src="{{carro.imagem_path}}" alt="Photo of  {{carro.marca}} {{carro.modelo}}" (click)="abrirImagem(carro.imagem_path)">
+      <img class="img-carro" title="Expandir imagem" mat-card-image src="{{carro.imagem_path}}" alt="Photo of  {{carro.marca}} {{carro.modelo}}" (click)="abrirImagem(carro.imagem_path)">
         <mat-card-content>
           <p>
             {{carro.quilometragem}} Km
@@ -29,17 +29,17 @@
 
         </mat-card-content>
         <mat-card-actions fxLayout="row wrap" fxLayoutAlign="center end">
-          <button mat-icon-button *ngIf="carro.status == 'Alugado'" (click)="confirmarDevolver(carro)">
+          <button title="Devolver carro" mat-icon-button *ngIf="carro.status == 'Alugado'" (click)="confirmarDevolver(carro)">
             <mat-icon *ngIf="carro.status == 'Alugado'">lock</mat-icon>
           </button>
-          <button mat-icon-button *ngIf="carro.status == 'Disponível'" [routerLink]="['/carro',carro.placa,'aluguel']">
+          <button mat-icon-button title="Alugar carro" *ngIf="carro.status == 'Disponível'" [routerLink]="['/carro',carro.placa,'aluguel']">
             <mat-icon *ngIf="carro.status == 'Disponível'">lock_open</mat-icon>
           </button>
-          <button mat-icon-button (click)="confirmarExcluir(carro)"
+          <button title="Excluir carro" mat-icon-button (click)="confirmarExcluir(carro)"
                   *ngIf="securityService.hasRoles('ROLE_ADMIN')">
             <mat-icon>delete</mat-icon>
           </button>
-          <button mat-icon-button [routerLink]="['/carro',carro.placa]"
+          <button title="Editar carro" mat-icon-button [routerLink]="['/carro',carro.placa]"
                   *ngIf="securityService.hasRoles('ROLE_ADMIN')">
             <mat-icon>edit</mat-icon>
           </button>

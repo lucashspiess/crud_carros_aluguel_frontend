@@ -26,10 +26,10 @@
     <ng-container matColumnDef="acao">
       <th mat-header-cell class="coluna" *matHeaderCellDef> Ação </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button (click)="confirmarExcluir(element)">
+        <button title="Excluir cliente" mat-icon-button (click)="confirmarExcluir(element)">
           <mat-icon>delete</mat-icon>
         </button>
-        <button mat-icon-button [routerLink]="['/cliente',element.id]">
+        <button title="Editar cliente" mat-icon-button [routerLink]="['/cliente',element.id]">
           <mat-icon>edit</mat-icon>
         </button>
       </td>
