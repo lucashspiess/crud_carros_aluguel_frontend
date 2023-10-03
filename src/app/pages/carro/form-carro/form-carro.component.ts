@@ -21,11 +21,14 @@ import {ImagemDialogComponent} from "../imagem-dialog/imagem-dialog.component";
 export class FormCarroComponent {
   formGroup!: FormGroup;
   selectedFile!: File
+
+  private readonly PATH_FRONT = "C:\\Portable20231\\workspace\\ueg-prog-webi-faculdade\\src\\carros\\";
   public readonly ACAO_INCLUIR = "Incluir";
   public readonly ACAO_EDITAR = "Editar";
 
-  imagem_id!: number;
+  imagem_pathAntigo!: string | undefined;
   imagem_path!: string | undefined;
+  caminho_front!: string | undefined;
 
   acao: string = this.ACAO_INCLUIR;
   placa!: string;
@@ -127,10 +130,11 @@ export class FormCarroComponent {
     if (paramPlaca) {
       this.carroService.carroControllerObterPorPlaca({placa: paramPlaca}).subscribe(
         retorno => {
-          console.log(retorno)
           this.acao = this.ACAO_EDITAR;
           this.placa = retorno.placa || "";
           this.imagem_path = retorno.imagem_path;
+          this.imagem_pathAntigo = retorno.imagem_caminhoArq;
+          this.caminho_front = retorno.imagem_caminhoFront;
           this.formGroup.patchValue(retorno);
         }
       )
@@ -141,6 +145,17 @@ export class FormCarroComponent {
     this.carroService.carroControllerAlterarCarro({placa: this.placa, body: this.formGroup.value})
       .subscribe(retorno => {
         console.log("editado: " + JSON.stringify(retorno));
+        if( this.imagem_pathAntigo && retorno.imagem_caminhoArq != this.imagem_pathAntigo && this.imagem_path){
+              console.log(this.caminho_front)
+              this.imagemService.imagemControllerExcluirFoto({path: this.imagem_pathAntigo}).subscribe(
+                () => {
+                  if (this.caminho_front) {
+                    this.imagemService.imagemControllerExcluirFoto({path: this.caminho_front}).subscribe()
+                  }
+                }
+              );
+        }
+
         this.showMensagemSimples("Edição realizada com sucesso!")
         this.router.navigateByUrl("/carro");
       })

@@ -135,4 +135,57 @@ export class ImagemControllerService extends BaseService {
     );
   }
 
+  /**
+   * Path part for operation imagemControllerExcluirFoto
+   */
+  static readonly ImagemControllerExcluirFotoPath = '/api/v1/imagem';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `imagemControllerExcluirFoto()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  imagemControllerExcluirFoto$Response(params: {
+    path: string;
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<boolean>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ImagemControllerService.ImagemControllerExcluirFotoPath, 'delete');
+    if (params) {
+      rb.query('path', params.path, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'blob',
+      accept: '*/*',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `imagemControllerExcluirFoto$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  imagemControllerExcluirFoto(params: {
+    path: string;
+  },
+  context?: HttpContext
+
+): Observable<boolean> {
+
+    return this.imagemControllerExcluirFoto$Response(params,context).pipe(
+      map((r: StrictHttpResponse<boolean>) => r.body as boolean)
+    );
+  }
+
 }

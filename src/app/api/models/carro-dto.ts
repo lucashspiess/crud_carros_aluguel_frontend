@@ -4,6 +4,8 @@ export interface CarroDto {
   ano?: number;
   cor?: string;
   diaria?: number;
+  imagem_caminhoArq?: string;
+  imagem_caminhoFront?: string;
   imagem_id?: number;
   imagem_path?: string;
   marca?: string;

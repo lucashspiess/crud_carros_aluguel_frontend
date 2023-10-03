@@ -14,6 +14,8 @@ import {AluguelControllerService} from "../../../api/services/aluguel-controller
 import {SecurityService} from "../../../arquitetura/security/security.service";
 import {MessageService} from "../../../arquitetura/message/message.service";
 import {ImagemDialogComponent} from "../imagem-dialog/imagem-dialog.component";
+import {ImagemControllerService} from "../../../api/services/imagem-controller.service";
+import {Imagem} from "../../../api/models/imagem";
 @Component({
   selector: 'app-list-carro',
   templateUrl: './list-carro.component.html',
@@ -21,6 +23,9 @@ import {ImagemDialogComponent} from "../imagem-dialog/imagem-dialog.component";
 })
 export class ListCarroComponent implements OnInit {
   carros: CarroDto[] = [];
+  imagem!: Imagem;
+
+  private readonly PATH_FRONT = "C:\\Portable20231\\workspace\\ueg-prog-webi-faculdade\\src\\carros\\";
 
   constructor(
     public carroService: CarroControllerService,
@@ -29,7 +34,7 @@ export class ListCarroComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     public securityService: SecurityService,
-    private messageService: MessageService
+    private imagemService: ImagemControllerService
   ) {
   }
 
@@ -57,7 +62,12 @@ export class ListCarroComponent implements OnInit {
             this.showMensagemSimples("Erro ao excluir");
           }
         }
-      )
+      );
+    if(carroDto.imagem_caminhoArq && carroDto.imagem_caminhoFront){
+      this.imagemService.imagemControllerExcluirFoto( {path: carroDto.imagem_caminhoArq}).subscribe();
+      this.imagemService.imagemControllerExcluirFoto({path: carroDto.imagem_caminhoFront}).subscribe();
+    }
+
   }
 
   confirmarExcluir(carroDto: CarroDto) {

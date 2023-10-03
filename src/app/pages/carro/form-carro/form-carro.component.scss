@@ -34,6 +34,7 @@ mat-form-field{
 .btn-imagem{
   margin-bottom: 40px;
   width: 212px;
+  background-color: #7b1fa2;
 }
 
 .imagem-selecionada{
@@ -53,4 +54,11 @@ mat-form-field{
 
 img{
   cursor: pointer;
+}
+
+.p-imagem{
+  margin-left:10px;
+  margin-top:12px;
+  color: #949494;
+  font-weight: lighter;
 }

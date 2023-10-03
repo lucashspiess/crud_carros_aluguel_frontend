@@ -90,13 +90,17 @@
       accept="image/*"
       #imageInput
     >
+      <div fxLayout="row">
       <button *ngIf="!imagem_path" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="imageInput.click()"><mat-icon> insert_photo</mat-icon>Selecionar imagem</button>
       <button *ngIf="imagem_path" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="imageInput.click()"><mat-icon> insert_photo</mat-icon>Alterar imagem</button>
+      <p *ngIf="selectedFile" class="p-imagem">{{selectedFile.name}}</p>
+        <p *ngIf="!selectedFile" class="p-imagem" >Nenhuma imagem selecionada*</p>
+      </div>
       <div>
       </div>
     <div>
       <button mat-raised-button type="button" class="btn-voltar" (click)="router.navigateByUrl('/carro')">Voltar</button>
-      <button mat-raised-button color="primary" type="submit">Salvar</button>
+      <button mat-raised-button color="primary" class="list-button" type="submit">Salvar</button>
     </div>
     </div>
     </div>
