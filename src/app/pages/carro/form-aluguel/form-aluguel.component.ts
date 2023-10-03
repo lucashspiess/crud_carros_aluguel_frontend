@@ -1,8 +1,8 @@
-import {Component, TemplateRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DateAdapter} from "@angular/material/core";
 import {CarroControllerService} from "../../../api/services/carro-controller.service";
-import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AluguelControllerService} from "../../../api/services/aluguel-controller.service";
@@ -12,11 +12,9 @@ import {
 } from "../../../core/confirmation-dialog/confirmation-dialog.component";
 import {AluguelDto} from "../../../api/models/aluguel-dto";
 import {ClienteControllerService} from "../../../api/services/cliente-controller.service";
-import {TipoDialogComponent} from "../../tipo-dialog/tipo-dialog.component";
 import {ClienteDialogComponent} from "../../cliente-dialog/cliente-dialog.component";
 import {ClienteDto} from "../../../api/models/cliente-dto";
 import {MessageService} from "../../../arquitetura/message/message.service";
-import {TipoDto} from "../../../api/models/tipo-dto";
 
 @Component({
   selector: 'app-form-cliente',
@@ -39,8 +37,7 @@ export class FormAluguelComponent {
     public carroService: CarroControllerService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    public clienteService: ClienteControllerService,
-    private messageService: MessageService
+    public clienteService: ClienteControllerService
   ) {
     this.createForm();
     this._adapter.setLocale("pt-br");

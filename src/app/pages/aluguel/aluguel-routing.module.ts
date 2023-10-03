@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import {ListAluguelComponent} from "./list-aluguel/list-aluguel.component";
 import {HomeAluguelComponent} from "./home-aluguel/home-aluguel.component";
 

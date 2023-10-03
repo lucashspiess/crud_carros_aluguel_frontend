@@ -5,12 +5,9 @@ import {BreakpointObserver} from "@angular/cdk/layout";
 import {NavigationEnd, Router} from "@angular/router";
 import {delay} from "rxjs";
 import {filter} from "rxjs/operators";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {CarroDto} from "../../api/models/carro-dto";
 import {ConfirmationDialog} from "../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {SecurityService} from "../../arquitetura/security/security.service";
-import {MessageService} from "../../arquitetura/message/message.service";
 
 
 @UntilDestroy()
@@ -28,7 +25,6 @@ export class HomeComponent {
     private observer: BreakpointObserver,
     private router: Router,
     private dialog: MatDialog,
-    private mensageService: MessageService,
     public securityService: SecurityService
   ) {
   }
@@ -77,7 +73,7 @@ export class HomeComponent {
     const dialogRef = this.dialog.open(ConfirmationDialog, {
       data: {
         titulo: 'Sobre',
-        mensagem: 'Sistema para controle de carros para aluguel - versão: 3.0',
+        mensagem: 'Sistema para controle de carros para aluguel - versão: 3.5',
         textoBotoes: {
           ok: 'Ok'
         },

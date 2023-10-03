@@ -1,10 +1,5 @@
 
-<button mat-raised-button color="primary" [routerLink]="['/carro','novo']"
-        *ngIf="securityService.hasRoles('ROLE_ADMIN')">
-  <mat-icon>add</mat-icon>
-  <span>Adicionar</span>
-</button>
-<div fxLayout="row wrap" fxLayoutAlign="start center" class="grid">
+<div fxLayout="row wrap" fxLayoutAlign="start " class="grid">
   <ng-container *ngFor="let carro of carros" style="margin: 0.5%">
     <mat-card class="example-card"
     >
@@ -29,9 +24,6 @@
 
         </mat-card-content>
         <mat-card-actions fxLayout="row wrap" fxLayoutAlign="center end">
-          <button title="Devolver carro" mat-icon-button *ngIf="carro.status == 'Alugado'" (click)="confirmarDevolver(carro)">
-            <mat-icon *ngIf="carro.status == 'Alugado'">lock</mat-icon>
-          </button>
           <button mat-icon-button title="Alugar carro" *ngIf="carro.status == 'Disponível'" [routerLink]="['/carro',carro.placa,'aluguel']">
             <mat-icon *ngIf="carro.status == 'Disponível'">lock_open</mat-icon>
           </button>

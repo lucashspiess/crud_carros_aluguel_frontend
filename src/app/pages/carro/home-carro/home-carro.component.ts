@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-carro.component.scss']
 })
 export class HomeCarroComponent {
-
 }

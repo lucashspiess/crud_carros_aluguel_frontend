@@ -10,7 +10,6 @@ import {TipoDto} from "../../../api/models/tipo-dto";
 import {TipoControllerService} from "../../../api/services/tipo-controller.service";
 import {TipoDialogComponent} from "../../tipo-dialog/tipo-dialog.component";
 import {ImagemControllerService} from "../../../api/services/imagem-controller.service";
-import {Imagem} from "../../../api/models/imagem";
 import {ImagemDialogComponent} from "../imagem-dialog/imagem-dialog.component";
 
 @Component({
@@ -22,7 +21,6 @@ export class FormCarroComponent {
   formGroup!: FormGroup;
   selectedFile!: File
 
-  private readonly PATH_FRONT = "C:\\Portable20231\\workspace\\ueg-prog-webi-faculdade\\src\\carros\\";
   public readonly ACAO_INCLUIR = "Incluir";
   public readonly ACAO_EDITAR = "Editar";
 

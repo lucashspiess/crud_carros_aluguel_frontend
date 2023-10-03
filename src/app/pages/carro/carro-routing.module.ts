@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import {HomeCarroComponent} from "./home-carro/home-carro.component";
-import {ListCarroComponent} from "./list-carro/list-carro.component";
 import {FormCarroComponent} from "./form-carro/form-carro.component";
 import {FormAluguelComponent} from "./form-aluguel/form-aluguel.component";
+import {TabCarroComponent} from "./tab-carro/tab-carro.component";
 
 export const carroRoutes: Routes = [
   {
@@ -12,11 +11,7 @@ export const carroRoutes: Routes = [
     children: [
       {
         path: "",
-        component: ListCarroComponent
-      },
-      {
-        path: ":carro_placa/:cpf/:data_inicio/:data_fim/aluguel",
-        component: FormAluguelComponent
+        component: TabCarroComponent
       },
       {
         path: ":carro_placa/aluguel",
@@ -28,10 +23,6 @@ export const carroRoutes: Routes = [
       },
       {
         path: ":placa",
-        component: FormCarroComponent
-      },
-      {
-        path: "novo/:marca/:modelo/:cor/:tipo",
         component: FormCarroComponent
       }
     ]

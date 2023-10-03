@@ -23,28 +23,31 @@ import {MatDialogModule} from "@angular/material/dialog";
 
 defineComponents(IgcRatingComponent)
 @NgModule({
-  declarations: [
-    ListClienteComponent,
-    HomeClienteComponent,
-    FormClienteComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(clienteRoutes),
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatDialogModule,
-    IgcFormsModule,
-    FormsModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    declarations: [
+        ListClienteComponent,
+        HomeClienteComponent,
+        FormClienteComponent,
+    ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(clienteRoutes),
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatDialogModule,
+        IgcFormsModule,
+        FormsModule
+    ],
+    exports: [
+        ListClienteComponent
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ClienteModule { }

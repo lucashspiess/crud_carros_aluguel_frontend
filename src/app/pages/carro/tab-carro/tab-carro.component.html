@@ -1,0 +1,15 @@
+<button mat-raised-button color="primary" [routerLink]="['/carro','novo']"
+        *ngIf="securityService.hasRoles('ROLE_ADMIN')">
+  <mat-icon>add</mat-icon>
+  <span>Adicionar</span>
+</button>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>Disponíveis </ng-template>
+    <app-list-carro-disponivel></app-list-carro-disponivel>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>Alugados </ng-template>
+    <app-list-carro-alugado></app-list-carro-alugado>
+  </mat-tab>
+</mat-tab-group>

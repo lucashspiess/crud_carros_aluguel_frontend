@@ -36,6 +36,7 @@ import {ClienteDialogComponent} from "./pages/cliente-dialog/cliente-dialog.comp
 import {MatCard} from "@angular/material/card";
 import {ImagemDialogComponent} from "./pages/carro/imagem-dialog/imagem-dialog.component";
 import {FlexModule} from "@angular/flex-layout";
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import {FlexModule} from "@angular/flex-layout";
     MatSnackBarModule,
     MatProgressSpinnerModule,
     AutenticacaoModule,
+    MatTabsModule,
     LoaderModule,
     MessageModule.forRoot(),
     SecurityModule,//TODO conferir a configuração

@@ -1,7 +1,7 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import { FormGroup} from "@angular/forms";
+
 
 @Component({
   selector: 'app-cliente-dialog',
@@ -12,8 +12,6 @@ export class ImagemDialogComponent implements OnInit {
   formGroup!: FormGroup;
   caminho: number;
   public constructor(
-    private formBuilder: FormBuilder,
-    private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<ImagemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: any,
   ) {

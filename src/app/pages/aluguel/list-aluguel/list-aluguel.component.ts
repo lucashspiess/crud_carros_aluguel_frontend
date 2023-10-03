@@ -15,7 +15,6 @@ export class ListAluguelComponent implements OnInit {
 
   constructor(
     public aluguelService: AluguelControllerService,
-    private router: Router
   ) {
   }
 
@@ -27,11 +26,5 @@ export class ListAluguelComponent implements OnInit {
     this.aluguelService.aluguelControllerListAllAluguel().subscribe(data => {
       this.aluguelListaDataSource.data = data;
     })
-  }
-
-  private atualizar() {
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigateByUrl('/aluguel');
-    });
   }
 }

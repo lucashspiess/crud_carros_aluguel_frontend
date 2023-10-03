@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ListCarroComponent } from './list-carro/list-carro.component';
+import { ListCarroDisponivelComponent } from './list-carro-disponivel/list-carro-disponivel.component';
 import { HomeCarroComponent } from './home-carro/home-carro.component';
 import {RouterModule} from "@angular/router";
 import {carroRoutes} from "./carro-routing.module";
@@ -22,14 +22,19 @@ import { CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {MatDialogModule} from "@angular/material/dialog";
 import {FormAluguelComponent} from "./form-aluguel/form-aluguel.component";
 import {FlexModule} from "@angular/flex-layout";
+import {MatTabsModule} from "@angular/material/tabs";
+import { TabCarroComponent } from './tab-carro/tab-carro.component';
+import {ListCarroAlugadoComponent} from "./list-carro-alugado/list-carro-alugado.component";
 
 defineComponents(IgcRatingComponent)
 @NgModule({
   declarations: [
-    ListCarroComponent,
+    ListCarroDisponivelComponent,
     HomeCarroComponent,
     FormCarroComponent,
-    FormAluguelComponent
+    FormAluguelComponent,
+    TabCarroComponent,
+    ListCarroAlugadoComponent
   ],
     imports: [
         CommonModule,
@@ -47,7 +52,8 @@ defineComponents(IgcRatingComponent)
         MatDialogModule,
         IgcFormsModule,
         FormsModule,
-        FlexModule
+        FlexModule,
+        MatTabsModule
     ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

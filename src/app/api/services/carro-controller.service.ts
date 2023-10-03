@@ -422,4 +422,112 @@ export class CarroControllerService extends BaseService {
     );
   }
 
+  /**
+   * Path part for operation carroControllerListarDisponiveis
+   */
+  static readonly CarroControllerListarDisponiveisPath = '/api/v1/carro/listarDisponiveis';
+
+  /**
+   * Listagem Geral
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `carroControllerListarDisponiveis()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  carroControllerListarDisponiveis$Response(params?: {
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<any>> {
+
+    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.CarroControllerListarDisponiveisPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<any>;
+      })
+    );
+  }
+
+  /**
+   * Listagem Geral
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `carroControllerListarDisponiveis$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  carroControllerListarDisponiveis(params?: {
+  },
+  context?: HttpContext
+
+): Observable<any> {
+
+    return this.carroControllerListarDisponiveis$Response(params,context).pipe(
+      map((r: StrictHttpResponse<any>) => r.body as any)
+    );
+  }
+
+  /**
+   * Path part for operation carroControllerListarAlugados
+   */
+  static readonly CarroControllerListarAlugadosPath = '/api/v1/carro/listarAlugados';
+
+  /**
+   * Listagem Geral
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `carroControllerListarAlugados()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  carroControllerListarAlugados$Response(params?: {
+  },
+  context?: HttpContext
+
+): Observable<StrictHttpResponse<any>> {
+
+    const rb = new RequestBuilder(this.rootUrl, CarroControllerService.CarroControllerListarAlugadosPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<any>;
+      })
+    );
+  }
+
+  /**
+   * Listagem Geral
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `carroControllerListarAlugados$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  carroControllerListarAlugados(params?: {
+  },
+  context?: HttpContext
+
+): Observable<any> {
+
+    return this.carroControllerListarAlugados$Response(params,context).pipe(
+      map((r: StrictHttpResponse<any>) => r.body as any)
+    );
+  }
+
 }
