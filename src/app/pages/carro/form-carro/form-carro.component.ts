@@ -26,6 +26,7 @@ export class FormCarroComponent {
 
   imagem_id!: number | undefined;
   imagemIdAntigo!: number | undefined;
+  imagem_path!: string | undefined;
 
   acao: string = this.ACAO_INCLUIR;
   placa!: string;
@@ -167,6 +168,12 @@ export class FormCarroComponent {
       // @ts-ignore
       this.selectedFile = <File>event.target.files[0];
       // @ts-ignore
+      if (event.target.files && event.target.files[0]) {
+        var reader = new FileReader();
+        reader.onload = (event: any) => {
+          this.imagem_path = event.target.result;
+        }
+      }
       this.imagemService.imagemControllerUploadImagem({body: {imagemASalvar: this.selectedFile}}).subscribe(
         retorno => {
           this.imagem_id = retorno.id;
