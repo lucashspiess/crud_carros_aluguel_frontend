@@ -126,7 +126,7 @@ export class FormCarroComponent {
     this.carroService.carroControllerAlterarCarro({placa: this.placa, body: this.formGroup.value})
       .subscribe(retorno => {
         if(this.imagemIdAntigo && retorno.imagem_id != this.imagemIdAntigo){
-          this.imagemService.imagemControllerExcluirFoto({id: this.imagemIdAntigo});
+          this.imagemService.imagemControllerExcluirFoto({id: this.imagemIdAntigo}).subscribe();
         }
         console.log("editado: " + retorno);
         this.showMensagemSimples("Edição realizada com sucesso!")
@@ -161,6 +161,17 @@ export class FormCarroComponent {
         id: id
       }
     });
+  }
+
+  cancelar(){
+    if(this.imagemIdAntigo){
+      if(this.imagem_id && this.imagemIdAntigo != this.imagem_id){
+        this.imagemService.imagemControllerExcluirFoto({id: this.imagem_id}).subscribe();
+      }
+    } else if (this.imagem_id){
+      this.imagemService.imagemControllerExcluirFoto({id: this.imagem_id}).subscribe();
+    }
+    this.router.navigateByUrl('/carro');
   }
 
   onFileChanged(event: Event) {

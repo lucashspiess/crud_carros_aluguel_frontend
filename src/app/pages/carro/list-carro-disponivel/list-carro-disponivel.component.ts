@@ -75,7 +75,7 @@ export class ListCarroDisponivelComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
       if (confirmed?.resultado) {
         console.log(confirmed.dado);
-        this.imagemService.imagemControllerExcluirFoto({id: confirmed.dado.imagem_id});
+        this.imagemService.imagemControllerExcluirFoto({id: confirmed.dado.imagem_id}).subscribe();
         this.remover(confirmed.dado);
       }
     });
