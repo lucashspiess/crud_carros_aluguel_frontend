@@ -24,9 +24,8 @@ export class FormCarroComponent {
   public readonly ACAO_INCLUIR = "Incluir";
   public readonly ACAO_EDITAR = "Editar";
 
-  imagem_pathAntigo!: string | undefined;
-  imagem_path!: string | undefined;
-  caminho_front!: string | undefined;
+  imagem_id!: number | undefined;
+  imagemIdAntigo!: number | undefined;
 
   acao: string = this.ACAO_INCLUIR;
   placa!: string;
@@ -65,20 +64,6 @@ export class FormCarroComponent {
 
 
   createForm() {
-      if(this.acao == "Editar"){
-        this.carroService.carroControllerObterPorPlaca({placa: this.placa}).subscribe(retorno =>
-          this.formGroup = this.formBuilder.group({
-            marca: [retorno.marca, Validators.required],
-            ano: [retorno.ano, Validators.required],
-            modelo: [retorno.modelo, Validators.required],
-            cor: [retorno.cor, Validators.required],
-            placa: [retorno.placa],
-            diaria: [retorno.diaria],
-            quilometragem: [retorno.quilometragem, Validators.required],
-            tipo_id: [retorno.tipo_id, Validators.required],
-            imagem_id: [retorno.imagem_id, Validators.required]
-          }));
-      }else{
         this.formGroup = this.formBuilder.group({
           marca: [null, Validators.required],
           ano: [null, Validators.required],
@@ -91,8 +76,6 @@ export class FormCarroComponent {
           imagem_id: [null, Validators.required]
         })
       }
-
-  }
 
   onSubmit() {
     if (this.formGroup.valid) {
@@ -130,9 +113,8 @@ export class FormCarroComponent {
         retorno => {
           this.acao = this.ACAO_EDITAR;
           this.placa = retorno.placa || "";
-          this.imagem_path = retorno.imagem_path;
-          this.imagem_pathAntigo = retorno.imagem_caminhoArq;
-          this.caminho_front = retorno.imagem_caminhoFront;
+          this.imagem_id = retorno.imagem_id;
+          this.imagemIdAntigo = retorno.imagem_id;
           this.formGroup.patchValue(retorno);
         }
       )
@@ -142,18 +124,10 @@ export class FormCarroComponent {
   private realizarEdicao() {
     this.carroService.carroControllerAlterarCarro({placa: this.placa, body: this.formGroup.value})
       .subscribe(retorno => {
-        console.log("editado: " + JSON.stringify(retorno));
-        if( this.imagem_pathAntigo && retorno.imagem_caminhoArq != this.imagem_pathAntigo && this.imagem_path){
-              console.log(this.caminho_front)
-              this.imagemService.imagemControllerExcluirFoto({path: this.imagem_pathAntigo}).subscribe(
-                () => {
-                  if (this.caminho_front) {
-                    this.imagemService.imagemControllerExcluirFoto({path: this.caminho_front}).subscribe()
-                  }
-                }
-              );
+        if(this.imagemIdAntigo && retorno.imagem_id != this.imagemIdAntigo){
+          this.imagemService.imagemControllerExcluirFoto({id: this.imagemIdAntigo});
         }
-
+        console.log("editado: " + retorno);
         this.showMensagemSimples("Edição realizada com sucesso!")
         this.router.navigateByUrl("/carro");
       })
@@ -180,10 +154,10 @@ export class FormCarroComponent {
     })
   }
 
-  abrirImagem(caminho: string | undefined){
+  abrirImagem(id: number | undefined){
     this.dialog.open(ImagemDialogComponent, {
       data:{
-        caminho: caminho
+        id: id
       }
     });
   }
@@ -193,17 +167,11 @@ export class FormCarroComponent {
       // @ts-ignore
       this.selectedFile = <File>event.target.files[0];
       // @ts-ignore
-      if (event.target.files && event.target.files[0]) {
-        var reader = new FileReader();
-        reader.onload = (event: any) => {
-          this.imagem_path = event.target.result;
-        }
-        // @ts-ignore
-        reader.readAsDataURL(event.target.files[0]);
-      }
       this.imagemService.imagemControllerUploadImagem({body: {imagemASalvar: this.selectedFile}}).subscribe(
         retorno => {
-          this.formGroup.patchValue({imagem_id: retorno});
+          this.imagem_id = retorno.id;
+          this.formGroup.patchValue({imagem_id: this.imagem_id});
+          console.log(this.formGroup.value);
         }
       );
     }

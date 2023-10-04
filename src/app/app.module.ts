@@ -46,7 +46,7 @@ import {MatTabsModule} from "@angular/material/tabs";
     LoaderDialogComponent,
     TipoDialogComponent,
     ClienteDialogComponent,
-    ImagemDialogComponent
+    ImagemDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,11 +8,10 @@ import {
   ConfirmationDialogResult
 } from "../../../core/confirmation-dialog/confirmation-dialog.component";
 import {Router} from "@angular/router";
-import {AluguelControllerService} from "../../../api/services/aluguel-controller.service";
 import {SecurityService} from "../../../arquitetura/security/security.service";
 import {ImagemDialogComponent} from "../imagem-dialog/imagem-dialog.component";
 import {ImagemControllerService} from "../../../api/services/imagem-controller.service";
-import {Imagem} from "../../../api/models/imagem";
+import {HttpClient} from "@angular/common/http";
 @Component({
   selector: 'app-list-carro-disponivel',
   templateUrl: './list-carro-disponivel.component.html',
@@ -20,7 +19,7 @@ import {Imagem} from "../../../api/models/imagem";
 })
 export class ListCarroDisponivelComponent implements OnInit {
   carros: CarroDto[] = [];
-  imagem!: Imagem;
+  imagem!: any;
 
   constructor(
     public carroService: CarroControllerService,
@@ -28,7 +27,8 @@ export class ListCarroDisponivelComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     public securityService: SecurityService,
-    private imagemService: ImagemControllerService
+    public imagemService: ImagemControllerService,
+    public http: HttpClient
   ) {
   }
 
@@ -57,11 +57,6 @@ export class ListCarroDisponivelComponent implements OnInit {
           }
         }
       );
-    if(carroDto.imagem_caminhoArq && carroDto.imagem_caminhoFront){
-      this.imagemService.imagemControllerExcluirFoto( {path: carroDto.imagem_caminhoArq}).subscribe();
-      this.imagemService.imagemControllerExcluirFoto({path: carroDto.imagem_caminhoFront}).subscribe();
-    }
-
   }
 
   confirmarExcluir(carroDto: CarroDto) {
@@ -80,15 +75,16 @@ export class ListCarroDisponivelComponent implements OnInit {
     dialogRef.afterClosed().subscribe((confirmed: ConfirmationDialogResult) => {
       if (confirmed?.resultado) {
         console.log(confirmed.dado);
+        this.imagemService.imagemControllerExcluirFoto({id: confirmed.dado.imagem_id});
         this.remover(confirmed.dado);
       }
     });
   }
 
-  abrirImagem(caminho: string | undefined){
+  abrirImagem(id: number | undefined){
     this.dialog.open(ImagemDialogComponent, {
       data:{
-        caminho: caminho
+        id: id
       }
     });
   }

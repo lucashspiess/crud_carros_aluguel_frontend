@@ -24,6 +24,7 @@
     "@angular/router": "^16.0.0",
     "@ngneat/until-destroy": "^10.0.0-beta.0",
     "angular-star-rating": "^6.0.0",
+    "axios": "^1.5.1",
     "igniteui-angular": "^16.0.4",
     "igniteui-webcomponents": "^4.2.3",
     "rxjs": "~7.8.0",

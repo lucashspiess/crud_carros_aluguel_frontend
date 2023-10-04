@@ -1,19 +1,18 @@
 /* tslint:disable */
 /* eslint-disable */
 import { IEntidadeObject } from './i-entidade-object';
-import { Imagem } from './imagem';
 import { Tipo } from './tipo';
 export interface Carro {
   ano?: number;
+  compositePkEntidadeObject?: string;
   cor?: string;
   diaria?: number;
   foreignEntitiesMaps?: {
 [key: string]: IEntidadeObject;
 };
-  id?: {
-};
+  id?: string;
   idHash?: string;
-  imagem?: Imagem;
+  imagem_id?: number;
   marca?: string;
   modelo?: string;
   new?: boolean;

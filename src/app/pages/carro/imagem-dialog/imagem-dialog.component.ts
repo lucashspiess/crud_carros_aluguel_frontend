@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import { FormGroup} from "@angular/forms";
+import axios from "axios";
 
 
 @Component({
@@ -10,12 +11,12 @@ import { FormGroup} from "@angular/forms";
 })
 export class ImagemDialogComponent implements OnInit {
   formGroup!: FormGroup;
-  caminho: number;
+  id: number;
   public constructor(
     private dialogRef: MatDialogRef<ImagemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: any,
   ) {
-      this.caminho = data.caminho;
+      this.id = data.id;
   }
 
 
@@ -29,4 +30,5 @@ export class ImagemDialogComponent implements OnInit {
   public handleError = (controlName: string, errorName: string) => {
     return this.formGroup.controls[controlName].hasError(errorName);
   };
+  protected readonly axios = axios;
 }

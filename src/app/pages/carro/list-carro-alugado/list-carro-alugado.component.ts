@@ -10,6 +10,7 @@ import {
 import {Router} from "@angular/router";
 import {SecurityService} from "../../../arquitetura/security/security.service";
 import {ImagemDialogComponent} from "../imagem-dialog/imagem-dialog.component";
+import {ImagemControllerService} from "../../../api/services/imagem-controller.service";
 @Component({
   selector: 'app-list-carro-alugado',
   templateUrl: './list-carro-alugado.component.html',
@@ -22,7 +23,8 @@ export class ListCarroAlugadoComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router,
-    public securityService: SecurityService
+    public securityService: SecurityService,
+    public imagemService: ImagemControllerService
   ) {
   }
 
@@ -36,10 +38,10 @@ export class ListCarroAlugadoComponent implements OnInit {
     })
   }
 
-  abrirImagem(caminho: string | undefined){
+  abrirImagem(id: number | undefined){
     this.dialog.open(ImagemDialogComponent, {
       data:{
-        caminho: caminho
+        id: id
       }
     });
   }

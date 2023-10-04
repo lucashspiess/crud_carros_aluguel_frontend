@@ -83,7 +83,7 @@
     </mat-form-field>
     </div>
     <div fxLayout="column" class="botoes-form">
-    <input formControlName="imagem_id" style="display: none">
+    <input formControlName="imagem_id" style="display: none" value="{{imagem_id}}">
     <input
       style="display: none"
       type="file" (change)="onFileChanged($event)"
@@ -91,8 +91,8 @@
       #imageInput
     >
       <div fxLayout="row">
-      <button *ngIf="!imagem_path" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="imageInput.click()"><mat-icon> insert_photo</mat-icon>Selecionar imagem</button>
-      <button *ngIf="imagem_path" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="imageInput.click()"><mat-icon> insert_photo</mat-icon>Alterar imagem</button>
+      <button *ngIf="!imagem_id" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="imageInput.click()"><mat-icon> insert_photo</mat-icon>Selecionar imagem</button>
+      <button *ngIf="imagem_id" mat-raised-button class="btn-imagem" color="primary" type="button" (click)="imageInput.click()"><mat-icon> insert_photo</mat-icon>Alterar imagem</button>
       <p *ngIf="selectedFile" class="p-imagem">{{selectedFile.name}}</p>
         <p *ngIf="!selectedFile" class="p-imagem" >Nenhuma imagem selecionada*</p>
       </div>
@@ -105,7 +105,7 @@
     </div>
     </div>
   </div>
-  <img *ngIf="imagem_path" title="Expandir imagem" class="imagem-selecionada" src="{{imagem_path}}" height="300px" (click)="abrirImagem(imagem_path)">
+  <img *ngIf="imagemIdAntigo" title="Expandir imagem" class="imagem-selecionada" src="http://localhost:8080/imagem/{{imagem_id}}" height="300px" (click)="abrirImagem(imagem_id)">
   </div>
 </form>
 

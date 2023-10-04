@@ -7,7 +7,7 @@
         <mat-card-title> {{carro.modelo}}</mat-card-title>
         <mat-card-subtitle>{{carro.marca}} - {{carro.ano}}</mat-card-subtitle>
       </mat-card-header>
-      <img class="img-carro" title="Expandir imagem" mat-card-image src="{{carro.imagem_path}}" alt="Photo of  {{carro.marca}} {{carro.modelo}}" (click)="abrirImagem(carro.imagem_path)">
+      <img *ngIf="carro.imagem_id" class="img-carro" title="Expandir imagem" mat-card-image src="http://localhost:8080/imagem/{{carro.imagem_id}}" alt="Photo of  {{carro.marca}} {{carro.modelo}}" (click)="abrirImagem(carro.imagem_id)">
         <mat-card-content>
           <p>
             {{carro.quilometragem}} Km
