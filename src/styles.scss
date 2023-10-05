@@ -59,3 +59,7 @@ html ::-webkit-scrollbar-track {
   border-radius: 50px;
   background: #555555;
 }
+
+.mat-mdc-tab-group{
+  --mat-tab-header-inactive-label-text-color: rgba(255, 255, 255, 1);
+}
