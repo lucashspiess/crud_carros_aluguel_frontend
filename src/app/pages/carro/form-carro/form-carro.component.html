@@ -38,7 +38,9 @@
           <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.nome}}</mat-option>
           <mat-option (click)="openDialog()">Adicionar tipo</mat-option>
         </mat-select>
-        <mat-error validationMessage>    </mat-error>
+        <mat-error *ngIf="handleError('ano', 'required')">
+          O tipo do carro é obrigatório
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="div_block">

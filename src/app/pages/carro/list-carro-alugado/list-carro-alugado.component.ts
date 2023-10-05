@@ -9,7 +9,7 @@ import {
 } from "../../../core/confirmation-dialog/confirmation-dialog.component";
 import {Router} from "@angular/router";
 import {SecurityService} from "../../../arquitetura/security/security.service";
-import {ImagemDialogComponent} from "../imagem-dialog/imagem-dialog.component";
+import {ImagemDialogComponent} from "../../../core/imagem-dialog/imagem-dialog.component";
 import {ImagemControllerService} from "../../../api/services/imagem-controller.service";
 @Component({
   selector: 'app-list-carro-alugado',

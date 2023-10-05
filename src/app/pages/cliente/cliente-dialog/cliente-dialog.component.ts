@@ -3,12 +3,12 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
-import {TipoControllerService} from "../../api/services/tipo-controller.service";
+import {TipoControllerService} from "../../../api/services/tipo-controller.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {SecurityService} from "../../arquitetura/security/security.service";
-import {ClienteControllerService} from "../../api/services/cliente-controller.service";
-import {ClienteDto} from "../../api/models/cliente-dto";
-import {TipoDto} from "../../api/models/tipo-dto";
+import {SecurityService} from "../../../arquitetura/security/security.service";
+import {ClienteControllerService} from "../../../api/services/cliente-controller.service";
+import {ClienteDto} from "../../../api/models/cliente-dto";
+import {TipoDto} from "../../../api/models/tipo-dto";
 
 @Component({
   selector: 'app-cliente-dialog',

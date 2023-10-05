@@ -8,9 +8,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SecurityService} from "../../../arquitetura/security/security.service";
 import {TipoDto} from "../../../api/models/tipo-dto";
 import {TipoControllerService} from "../../../api/services/tipo-controller.service";
-import {TipoDialogComponent} from "../../tipo-dialog/tipo-dialog.component";
+import {TipoDialogComponent} from "../../tipo/tipo-dialog/tipo-dialog.component";
 import {ImagemControllerService} from "../../../api/services/imagem-controller.service";
-import {ImagemDialogComponent} from "../imagem-dialog/imagem-dialog.component";
+import {ImagemDialogComponent} from "../../../core/imagem-dialog/imagem-dialog.component";
 
 @Component({
   selector: 'app-form-carro',

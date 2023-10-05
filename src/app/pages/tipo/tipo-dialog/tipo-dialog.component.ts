@@ -3,7 +3,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DateAdapter} from "@angular/material/core";
-import {TipoControllerService} from "../../api/services/tipo-controller.service";
+import {TipoControllerService} from "../../../api/services/tipo-controller.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({

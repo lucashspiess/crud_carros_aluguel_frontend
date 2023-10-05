@@ -29,12 +29,12 @@ import {SecurityInterceptor} from "./arquitetura/security/security.interceptor";
 import {LoaderModule} from "./arquitetura/loader/loader.module";
 import {TipoModule} from "./pages/tipo/tipo.module";
 import {AluguelModule} from "./pages/aluguel/aluguel.module";
-import { TipoDialogComponent } from './pages/tipo-dialog/tipo-dialog.component';
+import { TipoDialogComponent } from './pages/tipo/tipo-dialog/tipo-dialog.component';
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
-import {ClienteDialogComponent} from "./pages/cliente-dialog/cliente-dialog.component";
+import {ClienteDialogComponent} from "./pages/cliente/cliente-dialog/cliente-dialog.component";
 import {MatCard} from "@angular/material/card";
-import {ImagemDialogComponent} from "./pages/carro/imagem-dialog/imagem-dialog.component";
+import {ImagemDialogComponent} from "./core/imagem-dialog/imagem-dialog.component";
 import {FlexModule} from "@angular/flex-layout";
 import {MatTabsModule} from "@angular/material/tabs";
 

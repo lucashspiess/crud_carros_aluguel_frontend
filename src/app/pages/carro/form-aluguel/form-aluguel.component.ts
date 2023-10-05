@@ -12,7 +12,7 @@ import {
 } from "../../../core/confirmation-dialog/confirmation-dialog.component";
 import {AluguelDto} from "../../../api/models/aluguel-dto";
 import {ClienteControllerService} from "../../../api/services/cliente-controller.service";
-import {ClienteDialogComponent} from "../../cliente-dialog/cliente-dialog.component";
+import {ClienteDialogComponent} from "../../cliente/cliente-dialog/cliente-dialog.component";
 import {ClienteDto} from "../../../api/models/cliente-dto";
 import {MessageService} from "../../../arquitetura/message/message.service";
 
